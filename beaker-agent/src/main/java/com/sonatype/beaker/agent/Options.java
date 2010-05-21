@@ -20,45 +20,52 @@ public class Options
 
     private final String spec;
 
+    private Collection<URL> aspectPath;
+
     public Options(final String spec) {
         assert spec != null;
         this.spec = spec;
     }
 
     public Collection<URL> getAspectPath() {
-        String path = System.getProperty(MAVEN_ASPECT_PATH);
-        if (path == null) {
-            return Collections.emptyList();
+        if (aspectPath == null) {
+            String path = System.getProperty(MAVEN_ASPECT_PATH);
+            if (path == null) {
+                return Collections.emptyList();
+            }
+
+            String[] items = path.split(File.pathSeparator);
+            List<URL> elements = new ArrayList<URL>(items.length);
+            for (String item : items) {
+                try {
+                    URL url;
+
+                    File file = new File(item);
+                    if (file.isFile()) {
+                        url = file.toURI().toURL();
+                    }
+                    else {
+                        url = new URL(item);
+                    }
+
+                    elements.add(url);
+                }
+                catch (MalformedURLException e) {
+                    System.err.println("Invalid URL: " + item);
+                }
+            }
+
+            aspectPath = elements;
         }
 
-        String[] items = path.split(File.pathSeparator);
-        List<URL> elements = new ArrayList<URL>(items.length);
-        for (String item : items) {
-            try {
-                URL url;
-
-                File file = new File(item);
-                if (file.isFile()) {
-                    url = file.toURI().toURL();
-                }
-                else {
-                    url = new URL(item);
-                }
-
-                elements.add(url);
-            }
-            catch (MalformedURLException e) {
-                System.err.println("Invalid URL: " + item);
-            }
-        }
-
-        return elements;
+        return aspectPath;
     }
 
     @Override
     public String toString() {
-        return "Options{" +
+        return "{" +
             "spec='" + spec + '\'' +
+            ", aspectPath=" + getAspectPath() +
             '}';
     }
 }
