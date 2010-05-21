@@ -1,29 +1,31 @@
 package com.sonatype.beaker.agent;
 
-import org.codehaus.plexus.classworlds.realm.ClassRealm;
-import org.codehaus.plexus.classworlds.realm.NoSuchRealmException;
-
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
- * ???
+ * Agent configuration options.
  *
  * @author <a href="mailto:jason@planet57.com">Jason Dillon</a>
  * @since 0.1
  */
-public class AspectPath
-    implements Iterable<URL>
+public class Options
 {
     public static final String MAVEN_ASPECT_PATH = "maven.aspect.path";
 
-    public Collection<URL> getElements() {
+    private final String spec;
+
+    public Options(final String spec) {
+        assert spec != null;
+        this.spec = spec;
+    }
+
+    public Collection<URL> getAspectPath() {
         String path = System.getProperty(MAVEN_ASPECT_PATH);
         if (path == null) {
             return Collections.emptyList();
@@ -53,7 +55,10 @@ public class AspectPath
         return elements;
     }
 
-    public Iterator<URL> iterator() {
-        return getElements().iterator();
+    @Override
+    public String toString() {
+        return "Options{" +
+            "spec='" + spec + '\'' +
+            '}';
     }
 }
