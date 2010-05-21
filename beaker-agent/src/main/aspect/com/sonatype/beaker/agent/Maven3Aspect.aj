@@ -16,4 +16,17 @@ public aspect Maven3Aspect
     {
         new Configurator.Maven3().configure(thisJoinPoint.getThis());
     }
+
+//    /**
+//     * Capture when an artifact has been resolved.
+//     */
+//    after() returning:
+//        execution(void org.apache.maven.artifact.resolver.DefaultArtifactResolver.resolve(
+//            org.apache.maven.artifact.Artifact,
+//            org.apache.maven.artifact.repository.RepositoryRequest,
+//            org.apache.maven.wagon.events.TransferListener,
+//            boolean))
+//    {
+//        System.out.println("MEEP> " + thisJoinPoint.getArgs()[0]);
+//    }
 }

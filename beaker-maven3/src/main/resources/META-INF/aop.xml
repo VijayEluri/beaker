@@ -5,6 +5,8 @@
 
 <aspectj>
     <aspects>
-        <aspect name="com.sonatype.beaker.maven3.ArtifactInspectorAspect"/>
+        <aspect name="com.sonatype.beaker.maven3.MeepRules"/>
     </aspects>
+
+    <weaver options="-Xlint:ignore"/>
 </aspectj>

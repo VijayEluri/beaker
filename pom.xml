@@ -149,6 +149,7 @@
         <module>beaker-lexicon</module>
         <module>beaker-core</module>
         <module>beaker-maven3</module>
+        <module>beaker-maven3-agent</module>
     </modules>
     
     <build>
