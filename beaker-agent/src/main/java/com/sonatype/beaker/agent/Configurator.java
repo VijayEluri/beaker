@@ -13,7 +13,6 @@ public abstract class Configurator
 {
     public void configure(final Object launcher) {
         assert launcher != null;
-
         try {
             Object world = getWorld(launcher);
             Object realm = getRealm(world);
@@ -40,7 +39,7 @@ public abstract class Configurator
         Method getRealm = world.getClass().getMethod("getRealm", String.class);
         return getRealm.invoke(world, "plexus.core");
     }
-    
+
     protected Method getAddUrlMethod(final Object realm) throws Exception {
         assert realm != null;
         return realm.getClass().getMethod("addURL", URL.class);
