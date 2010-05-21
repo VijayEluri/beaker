@@ -1,5 +1,7 @@
 package com.sonatype.beaker.lexicon;
 
+import java.io.File;
+
 /**
  * ???
  *
@@ -14,6 +16,14 @@ public class ArtifactResolved
     private String artifactId;
 
     private String version;
+
+    private String scope;
+
+    private String type;
+
+    private String classifier;
+
+    private File file;
 
     public String getGroupId() {
         return groupId;
@@ -37,5 +47,37 @@ public class ArtifactResolved
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getClassifier() {
+        return classifier;
+    }
+
+    public void setClassifier(String classifier) {
+        this.classifier = classifier;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 }

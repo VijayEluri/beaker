@@ -1,6 +1,8 @@
 package com.sonatype.beaker.core;
 
+import com.sonatype.beaker.lexicon.Fault;
 import com.sonatype.beaker.lexicon.Meep;
+import org.apache.commons.beanutils.PropertyUtils;
 
 /**
  * ???
@@ -32,6 +34,19 @@ public class Beaker
         }
         catch (Exception e) {
             System.err.println("Failed to handle: " + e);
+        }
+    }
+    
+    public static void meep(final Meep meep, final Object source) {
+        assert meep != null;
+        assert source != null;
+
+        try {
+            PropertyUtils.copyProperties(meep, source);
+            meep(meep);
+        }
+        catch (Exception e) {
+            meep(new Fault(e));
         }
     }
 
