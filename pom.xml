@@ -123,7 +123,13 @@
                 <artifactId>beaker-lexicon</artifactId>
                 <version>0.1-SNAPSHOT</version>
             </dependency>
-            
+
+            <dependency>
+                <groupId>com.sonatype.beaker</groupId>
+                <artifactId>beaker-core</artifactId>
+                <version>0.1-SNAPSHOT</version>
+            </dependency>
+
             <dependency>
                 <groupId>com.sonatype.beaker</groupId>
                 <artifactId>beaker-maven3</artifactId>
@@ -135,6 +141,7 @@
     <modules>
         <module>beaker-agent</module>
         <module>beaker-lexicon</module>
+        <module>beaker-core</module>
         <module>beaker-maven3</module>
     </modules>
     

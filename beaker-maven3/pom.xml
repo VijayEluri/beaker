@@ -20,17 +20,12 @@
     <dependencies>
         <dependency>
             <groupId>com.sonatype.beaker</groupId>
-            <artifactId>beaker-lexicon</artifactId>
+            <artifactId>beaker-core</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.thoughtworks.xstream</groupId>
-            <artifactId>xstream</artifactId>
         </dependency>
 
         <dependency>

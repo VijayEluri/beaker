@@ -1,5 +1,8 @@
 package com.sonatype.beaker.maven3;
 
+import com.sonatype.beaker.core.Beaker;
+import com.sonatype.beaker.lexicon.ArtifactResolved;
+
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.resolver.DefaultArtifactResolver;
 import org.apache.maven.artifact.repository.RepositoryRequest;
@@ -11,6 +14,8 @@ public privileged aspect ArtifactInspectorAspect
         args(artifact,..) && execution(void DefaultArtifactResolver.resolve(Artifact, RepositoryRequest, TransferListener, boolean));
 
     after(Artifact artifact) returning: resolve(artifact) {
-        System.out.println(artifact);
+        ArtifactResolved meep = new ArtifactResolved();
+        // TODO: Fill in meep with details
+        Beaker.meep(meep);
     }
 }
