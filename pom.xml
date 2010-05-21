@@ -20,13 +20,11 @@
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <!--
     <scm>
-        <connection>scm:git:git://github.com/sonatype/sonatype-hudson.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/sonatype/sonatype-hudson.git</developerConnection>
-        <url>https://github.com/sonatype/sonatype-hudson</url>
+        <connection>scm:git:git://github.com/jdillon/beaker.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/jdillon/beaker.git</developerConnection>
+        <url>http://github.com/jdillon/beaker</url>
     </scm>
-    -->
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
