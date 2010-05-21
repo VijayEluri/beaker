@@ -11,6 +11,9 @@ import com.sonatype.beaker.lexicon.ArtifactResolved;
  */
 public privileged aspect ArtifactInspectorAspect
 {
+    /**
+     * Capture when an artifact has been resolved.
+     */
     after() returning:
         execution(void org.apache.maven.artifact.resolver.DefaultArtifactResolver.resolve(
             org.apache.maven.artifact.Artifact,
