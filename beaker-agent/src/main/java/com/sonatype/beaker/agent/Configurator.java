@@ -72,7 +72,8 @@ public abstract class Configurator
         }
 
         @Override
-        protected Method getAddUrlMethod(Object realm) throws Exception {
+        protected Method getAddUrlMethod(final Object realm) throws Exception {
+            assert realm != null;
             return realm.getClass().getMethod("addConstituent", URL.class);
         }
     }

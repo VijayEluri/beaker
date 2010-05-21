@@ -6,8 +6,8 @@
 <aspectj>
     <aspects>
         <!--<aspect name="com.sonatype.beaker.agent.Trace"/>-->
-        <aspect name="com.sonatype.beaker.agent.Maven2ConfiguratorAspect"/>
-        <aspect name="com.sonatype.beaker.agent.Maven3ConfiguratorAspect"/>
+        <aspect name="com.sonatype.beaker.agent.Maven2Aspect"/>
+        <aspect name="com.sonatype.beaker.agent.Maven3Aspect"/>
     </aspects>
 
     <weaver options="-Xlint:ignore"/>
