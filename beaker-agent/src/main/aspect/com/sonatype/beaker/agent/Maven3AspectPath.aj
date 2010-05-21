@@ -1,7 +1,5 @@
 package com.sonatype.beaker.agent;
 
-import org.codehaus.plexus.classworlds.launcher.Launcher;
-
 /**
  * Configure the {@link AspectPath} for Maven 3.
  *
@@ -10,10 +8,9 @@ import org.codehaus.plexus.classworlds.launcher.Launcher;
  */
 public aspect Maven3AspectPath
 {
-    after(Launcher launcher) returning:
-        this(launcher) &&
-        execution(void Launcher.configure(java.io.InputStream))
+    after() returning:
+        execution(void org.codehaus.plexus.classworlds.launcher.Launcher.configure(java.io.InputStream))
     {
-        Maven3Configurator.configure(launcher.getWorld());
+        Maven3Configurator.configure(thisJoinPoint.getThis());
     }
 }

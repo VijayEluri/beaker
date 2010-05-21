@@ -51,6 +51,9 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
+                <configuration>
+                    <Xlint>ignore</Xlint>
+                </configuration>
             </plugin>
 
             <plugin>

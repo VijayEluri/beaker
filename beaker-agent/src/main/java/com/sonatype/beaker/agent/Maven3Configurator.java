@@ -1,9 +1,6 @@
 package com.sonatype.beaker.agent;
 
-import org.codehaus.plexus.classworlds.ClassWorld;
-import org.codehaus.plexus.classworlds.realm.ClassRealm;
-import org.codehaus.plexus.classworlds.realm.NoSuchRealmException;
-
+import java.lang.reflect.Method;
 import java.net.URL;
 
 /**
@@ -16,20 +13,27 @@ public class Maven3Configurator
 {
     public static final String PLEXUS_CORE = "plexus.core";
 
-    public static void configure(final ClassWorld world) {
-        assert world != null;
+    public static void configure(final Object obj) {
+        assert obj != null;
 
         System.out.println("Configuring for Maven 3");
 
         try {
-            ClassRealm realm = world.getRealm(PLEXUS_CORE);
+            Method getWorld = obj.getClass().getMethod("getWorld");
+            Object world = getWorld.invoke(obj);
+
+            Method getRealm = world.getClass().getMethod("getRealm", String.class);
+            Object realm = getRealm.invoke(world, PLEXUS_CORE);
+
+            Method addUrl = realm.getClass().getMethod("addURL", URL.class);
+
             for (URL url : Agent.getAspectPath()) {
                 System.out.println("Adding URL: " + url);
-                realm.addURL(url);
+                addUrl.invoke(realm, url);
             }
         }
-        catch (NoSuchRealmException e) {
-            System.err.println("Missing realm: " + PLEXUS_CORE);
+        catch (Exception e) {
+            System.err.println("Failed to configure: " + e);
         }
     }
 }
