@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class Options
 {
-    public static final String MAVEN_ASPECT_PATH = "maven.aspect.path";
+    public static final String BEAKER_ASPECT_PATH = "beaker.aspectpath";
 
     private final String spec;
 
@@ -29,7 +29,7 @@ public class Options
 
     public Collection<URL> getAspectPath() {
         if (aspectPath == null) {
-            String path = System.getProperty(MAVEN_ASPECT_PATH);
+            String path = System.getProperty(BEAKER_ASPECT_PATH);
             if (path == null) {
                 return Collections.emptyList();
             }

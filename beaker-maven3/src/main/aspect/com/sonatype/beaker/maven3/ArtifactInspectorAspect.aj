@@ -15,7 +15,12 @@ public privileged aspect ArtifactInspectorAspect
 
     after(Artifact artifact) returning: resolve(artifact) {
         ArtifactResolved meep = new ArtifactResolved();
-        // TODO: Fill in meep with details
+
+        // TOOD: Use beanutils here...
+        meep.setGroupId(artifact.getGroupId());
+        meep.setArtifactId(artifact.getArtifactId());
+        meep.setVersion(artifact.getVersion());
+        
         Beaker.meep(meep);
     }
 }
