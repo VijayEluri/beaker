@@ -3,6 +3,7 @@ package com.sonatype.beaker.maven3;
 import com.sonatype.beaker.core.Beaker;
 import com.sonatype.beaker.core.MeepBuilder;
 import com.sonatype.beaker.lexicon.Generic;
+import com.sonatype.beaker.lexicon.StackTrace;
 import com.sonatype.beaker.lexicon.maven.ArtifactResolved;
 import com.sonatype.beaker.lexicon.maven.MojoExecute;
 import com.sonatype.beaker.lexicon.maven.PluginContext;
