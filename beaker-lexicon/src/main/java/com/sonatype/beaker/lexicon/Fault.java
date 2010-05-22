@@ -1,6 +1,7 @@
 package com.sonatype.beaker.lexicon;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 /**
  * ???
@@ -12,6 +13,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 public class Fault
     extends MeepSupport
 {
+    @XStreamAsAttribute
     private final String message;
 
     private final Throwable cause;

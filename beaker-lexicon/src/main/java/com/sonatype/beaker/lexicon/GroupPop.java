@@ -1,6 +1,7 @@
 package com.sonatype.beaker.lexicon;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 /**
  * ???
@@ -12,8 +13,10 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 public class GroupPop
     extends MeepSupport
 {
+    @XStreamAsAttribute
     private final long id;
 
+    @XStreamAsAttribute
     private final String name;
 
     public GroupPop(final long id, final String name) {

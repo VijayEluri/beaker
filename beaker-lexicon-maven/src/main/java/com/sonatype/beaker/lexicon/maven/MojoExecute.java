@@ -2,6 +2,7 @@ package com.sonatype.beaker.lexicon.maven;
 
 import com.sonatype.beaker.lexicon.MeepSupport;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 /**
  * ???
@@ -13,8 +14,10 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 public class MojoExecute
     extends MeepSupport
 {
+    @XStreamAsAttribute
     private String goal;
 
+    @XStreamAsAttribute
     private String executionId;
 
     public String getGoal() {

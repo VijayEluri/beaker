@@ -34,14 +34,14 @@ public class StreamHandler
         return new OutputStreamWriter(System.out);
     }
 
-    public void handle(final Meep meep) throws Exception {
+    public synchronized void handle(final Meep meep) throws Exception {
         assert meep != null;
         xstream.toXML(meep, out);
         out.append("\n");
         out.flush();
     }
 
-    public void stop() throws Exception {
+    public synchronized void stop() throws Exception {
         out.flush();
     }
 }

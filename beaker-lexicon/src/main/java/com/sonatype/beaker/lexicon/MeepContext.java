@@ -1,5 +1,7 @@
 package com.sonatype.beaker.lexicon;
 
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+
 /**
  * ???
  *
@@ -8,10 +10,13 @@ package com.sonatype.beaker.lexicon;
  */
 public class MeepContext
 {
+    @XStreamAsAttribute
     private long id;
 
+    @XStreamAsAttribute
     private Long groupId;
 
+    @XStreamAsAttribute
     private String thread;
 
     public long getId() {
@@ -36,8 +41,10 @@ public class MeepContext
     }
 
     public void setThread(final String thread) {
-        // thread should not be null
-        this.thread = thread;
+        // Save the thread name, unless its main, when thread is null, assume its on main
+        if (thread != null && !thread.equals("main")) {
+            this.thread = thread;
+        }
     }
 
     public void setThread(final Thread thread) {

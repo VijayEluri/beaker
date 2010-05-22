@@ -1,6 +1,7 @@
 package com.sonatype.beaker.lexicon;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 import java.util.Date;
 
@@ -14,26 +15,29 @@ import java.util.Date;
 public class StreamClose
     extends MeepSupport
 {
-    private final long meepCount;
-
-    private final long groupCount;
-
+    @XStreamAsAttribute
     private final Date date = new Date();
 
-    public StreamClose(final long meepCount, final long groupCount) {
-        this.meepCount = meepCount;
-        this.groupCount = groupCount;
-    }
+    @XStreamAsAttribute
+    private final long meeps;
 
-    public long getMeepCount() {
-        return meepCount;
-    }
+    @XStreamAsAttribute
+    private final long groups;
 
-    public long getGroupCount() {
-        return groupCount;
+    public StreamClose(final long meeps, final long groups) {
+        this.meeps = meeps + 1; // include ourselves
+        this.groups = groups;
     }
 
     public Date getDate() {
         return date;
+    }
+
+    public long getMeeps() {
+        return meeps;
+    }
+
+    public long getGroups() {
+        return groups;
     }
 }

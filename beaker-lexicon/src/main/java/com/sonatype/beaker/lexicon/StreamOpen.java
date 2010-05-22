@@ -1,6 +1,7 @@
 package com.sonatype.beaker.lexicon;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 import java.util.Date;
 
@@ -14,6 +15,7 @@ import java.util.Date;
 public class StreamOpen
     extends MeepSupport
 {
+    @XStreamAsAttribute
     private final Date date = new Date();
 
     public Date getDate() {

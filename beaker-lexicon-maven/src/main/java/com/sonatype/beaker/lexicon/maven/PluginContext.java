@@ -2,6 +2,7 @@ package com.sonatype.beaker.lexicon.maven;
 
 import com.sonatype.beaker.lexicon.MeepSupport;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 /**
  * ???
@@ -13,10 +14,13 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 public class PluginContext
     extends MeepSupport
 {
+    @XStreamAsAttribute
     private String groupId;
 
+    @XStreamAsAttribute
     private String artifactId;
 
+    @XStreamAsAttribute
     private String version;
 
     public String getGroupId() {
