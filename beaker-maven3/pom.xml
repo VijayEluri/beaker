@@ -25,7 +25,7 @@
 
         <dependency>
             <groupId>com.sonatype.beaker</groupId>
-            <artifactId>beaker-maven-lexicon</artifactId>
+            <artifactId>beaker-lexicon-maven</artifactId>
         </dependency>
 
         <dependency>
@@ -33,46 +33,10 @@
             <artifactId>aspectjrt</artifactId>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.apache.maven</groupId>-->
-            <!--<artifactId>maven-embedder</artifactId>-->
-            <!--<version>3.0-beta-1</version>-->
-            <!--<scope>provided</scope>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>log4j</groupId>-->
-                    <!--<artifactId>log4j</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>commons-logging</groupId>-->
-                    <!--<artifactId>commons-logging-api</artifactId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>org.apache.maven</groupId>-->
-            <!--<artifactId>maven-compat</artifactId>-->
-            <!--<version>3.0-beta-1</version>-->
-            <!--<scope>provided</scope>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>log4j</groupId>-->
-                    <!--<artifactId>log4j</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>commons-logging</groupId>-->
-                    <!--<artifactId>commons-logging-api</artifactId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>org.apache.maven.wagon</groupId>-->
-            <!--<artifactId>wagon-provider-api</artifactId>-->
-            <!--<version>1.0-beta-2</version>-->
-            <!--<scope>provided</scope>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -94,6 +58,21 @@
                         <goals>
                             <goal>shade</goal>
                         </goals>
+                        <configuration>
+                            <artifactSet>
+                                <excludes>
+                                    <exclude>org.aspectj:aspectjrt</exclude>
+                                </excludes>
+                            </artifactSet>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <manifestEntries>
+                                        <Premain-Class>org.aspectj.weaver.loadtime.Agent</Premain-Class>
+                                        <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                                    </manifestEntries>
+                                </transformer>
+                            </transformers>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
