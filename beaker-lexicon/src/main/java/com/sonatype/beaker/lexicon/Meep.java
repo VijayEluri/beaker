@@ -1,7 +1,5 @@
 package com.sonatype.beaker.lexicon;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 /**
  * ???
  *

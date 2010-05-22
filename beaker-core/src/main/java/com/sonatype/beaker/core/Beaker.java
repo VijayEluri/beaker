@@ -1,12 +1,10 @@
 package com.sonatype.beaker.core;
 
 import com.sonatype.beaker.core.handler.DefaultHandler;
-import com.sonatype.beaker.lexicon.Fault;
 import com.sonatype.beaker.lexicon.Meep;
 import com.sonatype.beaker.lexicon.MeepContext;
 import com.sonatype.beaker.lexicon.StreamClose;
 import com.sonatype.beaker.lexicon.StreamOpen;
-import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
