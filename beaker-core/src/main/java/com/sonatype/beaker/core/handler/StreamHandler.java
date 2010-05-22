@@ -1,5 +1,6 @@
-package com.sonatype.beaker.core;
+package com.sonatype.beaker.core.handler;
 
+import com.sonatype.beaker.core.Handler;
 import com.sonatype.beaker.lexicon.Meep;
 import com.thoughtworks.xstream.XStream;
 
@@ -13,24 +14,24 @@ import java.io.Writer;
  * @author <a href="mailto:jason@planet57.com">Jason Dillon</a>
  * @since 0.1
  */
-public class StreamMeepHandler
-    implements MeepHandler
+public class StreamHandler
+    implements Handler
 {
     private final Writer out;
 
     private final XStream xstream;
 
-    public StreamMeepHandler(final Writer out) throws Exception {
+    public StreamHandler(final Writer out) throws Exception {
         assert out != null;
         this.out = out;
         this.xstream = new XStream();
     }
 
-    public StreamMeepHandler(final OutputStream out) throws Exception {
+    public StreamHandler(final OutputStream out) throws Exception {
         this(new OutputStreamWriter(out));
     }
 
-    public StreamMeepHandler() throws Exception {
+    public StreamHandler() throws Exception {
         this(System.out);
     }
 

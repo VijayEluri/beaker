@@ -7,7 +7,7 @@ ASPECTPATH="`pwd`/beaker-maven3/target/beaker-maven3-0.1-SNAPSHOT.jar"
 MAVEN_OPTS="$MAVEN_OPTS -javaagent:${AGENTPATH}=foo,bar,baz"
 #MAVEN_OPTS="$MAVEN_OPTS -Daj.weaving.verbose=true -Dorg.aspectj.weaver.showWeaveInfo=true"
 MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.aspectpath=$ASPECTPATH"
-MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.handler=com.sonatype.beaker.core.StreamMeepHandler"
+MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.handler=com.sonatype.beaker.core.StreamHandler"
 
 export MAVEN_OPTS
 

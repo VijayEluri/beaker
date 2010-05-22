@@ -1,7 +1,5 @@
 package com.sonatype.beaker.lexicon;
 
-import java.io.File;
-
 /**
  * ???
  *
@@ -9,19 +7,30 @@ import java.io.File;
  * @since 0.1
  */
 public class Fault
-    implements Meep
+    extends MeepSupport
 {
-    private Throwable cause;
+    private final String message;
 
-    public Fault(Throwable cause) {
+    private final Throwable cause;
+
+    public Fault(final String message, final Throwable cause) {
+        this.message = message;
         this.cause = cause;
+    }
+
+    public Fault(final String message) {
+        this(message, null);
+    }
+
+    public Fault(final Throwable cause) {
+        this(null, cause);
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     public Throwable getCause() {
         return cause;
-    }
-
-    public void setCause(Throwable cause) {
-        this.cause = cause;
     }
 }
