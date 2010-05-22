@@ -9,11 +9,11 @@ package com.sonatype.beaker.lexicon;
 public abstract class MeepSupport
     implements Meep
 {
-    private Context context;
+    private MeepContext context;
 
-    public Context getContext() {
+    public MeepContext getContext() {
         if (context == null) {
-            context = new Context();
+            context = new MeepContext();
         }
         return context;
     }

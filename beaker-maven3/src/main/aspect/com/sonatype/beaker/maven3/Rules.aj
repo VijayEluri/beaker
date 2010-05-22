@@ -24,7 +24,7 @@ public privileged aspect Rules
             boolean))
     {
         Object artifact = thisJoinPoint.getArgs()[0];
-        Beaker.meep(new ArtifactResolved(), artifact);
+        MeepBuilder.meep(new ArtifactResolved(), artifact);
     }
 
     /**
@@ -35,18 +35,29 @@ public privileged aspect Rules
             org.apache.maven.execution.MavenSession,
             org.apache.maven.plugin.MojoExecution))
     {
-        Group group = new Group("execute-mojo").open();
+        final Group group = new Group("execute-mojo").open();
 
         try {
             Object execution = thisJoinPoint.getArgs()[1];
+            MeepBuilder.meep(new MojoExecute(), execution);
+            
             DynaBean bean = new WrapDynaBean(execution);
-            Beaker.meep(new PluginContext(), bean.get("plugin"));
-            Beaker.meep(new MojoExecute(), execution);
+            MeepBuilder.meep(new PluginContext(), bean.get("plugin"));
 
             return proceed();
         }
         finally {
             group.close();
         }
+    }
+
+    before():
+        execution(void org.apache.maven.lifecycle.internal.DefaultExecutionEventCatapult.fire(
+            org.apache.maven.execution.ExecutionEvent.Type,
+            org.apache.maven.execution.MavenSession,
+            org.apache.maven.plugin.MojoExecution))
+    {
+        Object type = thisJoinPoint.getArgs()[0];
+        Beaker.meep(new Generic(type));
     }
 }

@@ -9,5 +9,5 @@ package com.sonatype.beaker.core.handler;
 public class DefaultHandler
     extends NopHandler
 {
-    // nothing
+    // empty
 }

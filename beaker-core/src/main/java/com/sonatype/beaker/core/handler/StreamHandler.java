@@ -3,6 +3,8 @@ package com.sonatype.beaker.core.handler;
 import com.sonatype.beaker.core.Handler;
 import com.sonatype.beaker.lexicon.Meep;
 import com.thoughtworks.xstream.XStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -17,6 +19,8 @@ import java.io.Writer;
 public class StreamHandler
     implements Handler
 {
+    private static final Logger log = LoggerFactory.getLogger(StreamHandler.class);
+
     private final Writer out;
 
     private final XStream xstream;

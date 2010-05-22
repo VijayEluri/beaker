@@ -2,14 +2,15 @@ package com.sonatype.beaker.core;
 
 import com.sonatype.beaker.core.handler.DefaultHandler;
 import com.sonatype.beaker.lexicon.Fault;
-import com.sonatype.beaker.lexicon.GroupClose;
-import com.sonatype.beaker.lexicon.GroupOpen;
 import com.sonatype.beaker.lexicon.Meep;
-import com.sonatype.beaker.lexicon.SessionClose;
-import com.sonatype.beaker.lexicon.SessionOpen;
+import com.sonatype.beaker.lexicon.MeepContext;
+import com.sonatype.beaker.lexicon.StreamClose;
+import com.sonatype.beaker.lexicon.StreamOpen;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.Stack;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * ???
@@ -21,6 +22,90 @@ public class Beaker
 {
     public static final String BEAKER_HANDLER = "beaker.handler";
 
+    private static final Logger log = LoggerFactory.getLogger(Beaker.class);
+
+    private final AtomicLong meepCounter = new AtomicLong(0);
+
+    private final Handler handler = createHandler();
+
+    private Beaker() {
+        startup();
+    }
+
+    private void startup() {
+        consume(new StreamOpen());
+
+        Runtime.getRuntime().addShutdownHook(new Thread("beaker-shutdown")
+        {
+            @Override
+            public void run() {
+                shutdown();
+            }
+        });
+    }
+
+    private void shutdown() {
+        consume(new StreamClose(getMeepCount(), Group.getCount()));
+
+        try {
+            getHandler().stop();
+        }
+        catch (Exception e) {
+            log.error("Failed to stop handler", e);
+        }
+    }
+
+    private Handler createHandler() {
+        String classname = System.getProperty(BEAKER_HANDLER);
+        if (classname == null) {
+            return new DefaultHandler();
+        }
+
+        try {
+            Class type = getClass().getClassLoader().loadClass(classname);
+            return (Handler) type.newInstance();
+        }
+        catch (Exception e) {
+            log.error("Failed to create handler; using default", e);
+            return new DefaultHandler();
+        }
+    }
+
+    public Handler getHandler() {
+        return handler;
+    }
+
+    public long getMeepCount() {
+        return meepCounter.get();
+    }
+
+    private void consume(final Meep meep) {
+        assert meep != null;
+
+        // Install the meep context
+        installContext(meep);
+
+        try {
+            // Handle the meep
+            getHandler().handle(meep);
+        }
+        catch (Exception e) {
+            log.error("Failed to handle: {}", meep, e);
+        }
+    }
+
+    private void installContext(final Meep meep) {
+        assert meep != null;
+        MeepContext ctx = meep.getContext();
+        ctx.setId(meepCounter.incrementAndGet());
+        ctx.setGroupId(Group.currentId());
+        ctx.setThread(Thread.currentThread());
+    }
+
+    //
+    // Factory Access
+    //
+
     private static Beaker instance;
 
     public static synchronized Beaker getInstance() {
@@ -29,12 +114,15 @@ public class Beaker
                 instance = new Beaker();
             }
             catch (Exception e) {
-                System.err.println("Failed to initialize: " + e);
-                e.printStackTrace();
+                log.error("Failed to initialize", e);
             }
         }
         return instance;
     }
+
+    //
+    // Main API
+    //
 
     public static void meep(final Meep meep) {
         assert meep != null;
@@ -43,98 +131,7 @@ public class Beaker
             getInstance().consume(meep);
         }
         catch (Exception e) {
-            System.err.println("Failed to consume: " + meep + "; because of: " + e);
-            e.printStackTrace();
-        }
-    }
-
-    private final Handler handler;
-
-    private Beaker() throws Exception {
-        this.handler = createHandler();
-        System.out.println("Using handler: " + handler);
-
-        consume(new SessionOpen());
-
-        Runtime.getRuntime().addShutdownHook(new Thread("beaker-shutdown")
-        {
-            @Override
-            public void run() {
-                consume(new SessionClose());
-                
-                try {
-                    getHandler().stop();
-                }
-                catch (Exception e) {
-                    System.err.println("Failed to stop handler: " + e);
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    private Handler createHandler() throws Exception {
-        String classname = System.getProperty(BEAKER_HANDLER);
-        if (classname == null) {
-            return new DefaultHandler();
-        }
-
-        Class type = getClass().getClassLoader().loadClass(classname);
-        return (Handler) type.newInstance();
-    }
-
-    public Handler getHandler() {
-        return handler;
-    }
-
-    private void consume(final Meep meep) {
-        assert meep != null;
-
-        // Install the meep context
-        Meep.Context ctx = meep.getContext();
-        ctx.setGroup(Group.current());
-        ctx.setThread(Thread.currentThread().getName());
-
-        try {
-            // Handle the meep
-            getHandler().handle(meep);
-        }
-        catch (Exception e) {
-            System.err.println("Failed to handle: " + meep + "; because of: " + e);
-            e.printStackTrace();
-        }
-
-        // Handle group open/close after we meep
-        if (meep instanceof GroupOpen) {
-            Group.push(((GroupOpen)meep).getId());
-        }
-        else if (meep instanceof GroupClose) {
-            long expected = ((GroupClose)meep).getId();
-            long found = Group.pop();
-
-            // Complain if there is a stack mismatch
-            if (found != expected) {
-                System.err.println("Unmatched group closure; expected: " + expected + "; found: " + found);
-            }
-        }
-    }
-
-    //
-    // Helpers
-    //
-
-    // FIXME: Move to MeepBuilder
-
-    public static void meep(final Meep meep, final Object source) {
-        assert meep != null;
-        assert source != null;
-
-        try {
-            PropertyUtils.copyProperties(meep, source);
-            meep(meep);
-        }
-        catch (Exception e) {
-            meep(new Fault(e));
+            log.error("Failed to consume: {}", meep, e);
         }
     }
 }

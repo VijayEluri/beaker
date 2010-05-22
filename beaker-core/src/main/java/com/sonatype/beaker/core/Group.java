@@ -1,11 +1,11 @@
 package com.sonatype.beaker.core;
 
-import com.sonatype.beaker.lexicon.GroupClose;
-import com.sonatype.beaker.lexicon.GroupOpen;
-import com.sonatype.beaker.lexicon.MeepSupport;
+import com.sonatype.beaker.lexicon.GroupPop;
+import com.sonatype.beaker.lexicon.GroupPush;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Stack;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -16,6 +16,8 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class Group
 {
+    private static final Logger log = LoggerFactory.getLogger(Group.class);
+
     private static final AtomicLong counter = new AtomicLong(0);
 
     private final long id;
@@ -37,40 +39,77 @@ public class Group
     }
 
     public Group open() {
-        Beaker.meep(new GroupOpen(getId(), getName()));
+        Beaker.meep(new GroupPush(id, name));
+        push(this);
         return this;
     }
 
     public Group close() {
-        Beaker.meep(new GroupClose(getId(), getName()));
+        Beaker.meep(new GroupPop(id, name));
+        Group last = pop();
+
+        // Complain if there is a stack mismatch
+        if (!last.equals(this)) {
+            log.error("Unmatched group closure; expected: {}; found: {}", this, last);
+        }
+
         return this;
     }
 
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Group that = (Group) obj;
+        return id == that.id && !(name != null ? !name.equals(that.name) : that.name != null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
+
     //
-    // Groups
+    // Group Stack
     //
 
     // FIXME: This needs to be a thread-local (inheritable)
-    private static final Stack<Long> groups = new Stack<Long>();
+    private static final Stack<Group> groups = new Stack<Group>();
 
-    public Stack<Long> groups() {
+    public static Stack<Group> groups() {
         return groups;
     }
 
-    public static Long current() {
+    public static Group current() {
         if (groups.isEmpty()) {
             return null;
         }
-        else {
-            return groups.peek();
-        }
+        return groups.peek();
     }
 
-    public static Long pop() {
+    public static Long currentId() {
+        if (groups.isEmpty()) {
+            return null;
+        }
+        return groups.peek().getId();
+    }
+
+    public static long getCount() {
+        return counter.get();
+    }
+
+    public static Group pop() {
         return groups.pop();
     }
 
-    public static void push(Long group) {
+    public static void push(final Group group) {
         groups.push(group);
     }
 }

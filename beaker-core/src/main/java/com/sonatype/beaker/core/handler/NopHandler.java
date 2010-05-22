@@ -13,7 +13,7 @@ public class NopHandler
     implements Handler
 {
     public void handle(final Meep meep) throws Exception {
-        // noting
+        // nothing
     }
 
     public void stop() throws Exception {
