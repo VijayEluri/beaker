@@ -8,17 +8,21 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  * @author <a href="mailto:jason@planet57.com">Jason Dillon</a>
  * @since 0.1
  */
-@XStreamAlias("generic")
-public class Generic
+@XStreamAlias("message")
+public class Message
     extends MeepSupport
 {
-    private final Object detail;
+    private final String detail;
 
-    public Generic(final Object detail) {
+    public Message(final String detail) {
         this.detail = detail;
     }
 
-    public Object getDetail() {
+    public Message(final Object detail) {
+        this(String.valueOf(detail));
+    }
+
+    public String getDetail() {
         return detail;
     }
 }

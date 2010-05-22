@@ -17,4 +17,12 @@
     <artifactId>beaker-lexicon</artifactId>
     <name>Beaker Lexicon</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
 </project>

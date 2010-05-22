@@ -1,8 +1,5 @@
 package com.sonatype.beaker.core.handler;
 
-import com.sonatype.beaker.core.Handler;
-import com.sonatype.beaker.lexicon.Meep;
-import com.thoughtworks.xstream.XStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,25 +16,22 @@ import java.io.Writer;
  * @since 0.1
  */
 public class FileHandler
-    implements Handler
+    extends StreamHandler
 {
     public static final String FILE_OUTPUT = "beaker.handler.file.output";
 
     private static final Logger log = LoggerFactory.getLogger(FileHandler.class);
 
-    private final XStream xstream;
-
-    private final Writer out;
-
-    public FileHandler() throws Exception {
-        this.xstream = new XStream();
-        this.out = getWriter();
-    }
-
-    private Writer getWriter() throws IOException {
-        File file = getFile();
-        log.info("Output file: {}", file);
-        return new BufferedWriter(new FileWriter(file));
+    @Override
+    protected Writer getWriter() {
+        try {
+            File file = getFile();
+            log.info("Output file: {}", file);
+            return new BufferedWriter(new FileWriter(file));
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private File getFile() throws IOException {
@@ -51,16 +45,5 @@ public class FileHandler
         }
         file.getParentFile().mkdirs();
         return file;
-    }
-
-    public void handle(final Meep meep) throws Exception {
-        assert meep != null;
-        xstream.toXML(meep, out);
-        out.append("\n");
-        out.flush();
-    }
-
-    public void stop() throws Exception {
-        out.flush();
     }
 }

@@ -6,7 +6,7 @@ AGENTPATH="`pwd`/beaker-maven3/target/beaker-maven3-0.1-SNAPSHOT.jar"
 MAVEN_OPTS="$MAVEN_OPTS -javaagent:${AGENTPATH}"
 #MAVEN_OPTS="$MAVEN_OPTS -Daj.weaving.verbose=true -Dorg.aspectj.weaver.showWeaveInfo=true"
 MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.handler=com.sonatype.beaker.core.handler.FileHandler"
-MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.handler.file.output=`pwd`/target/beaker.xml"
+MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.handler.file.output=`pwd`/beaker.xml"
 
 export MAVEN_OPTS
 

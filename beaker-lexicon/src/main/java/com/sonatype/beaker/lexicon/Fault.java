@@ -1,11 +1,14 @@
 package com.sonatype.beaker.lexicon;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
 /**
  * ???
  *
  * @author <a href="mailto:jason@planet57.com">Jason Dillon</a>
  * @since 0.1
  */
+@XStreamAlias("fault")
 public class Fault
     extends MeepSupport
 {

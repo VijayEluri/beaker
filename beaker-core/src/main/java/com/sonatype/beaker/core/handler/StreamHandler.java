@@ -6,7 +6,6 @@ import com.thoughtworks.xstream.XStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
@@ -25,18 +24,14 @@ public class StreamHandler
 
     private final XStream xstream;
 
-    public StreamHandler(final Writer out) throws Exception {
-        assert out != null;
-        this.out = out;
+    public StreamHandler() {
         this.xstream = new XStream();
+        this.xstream.autodetectAnnotations(true);
+        this.out = getWriter();
     }
 
-    public StreamHandler(final OutputStream out) throws Exception {
-        this(new OutputStreamWriter(out));
-    }
-
-    public StreamHandler() throws Exception {
-        this(System.out);
+    protected Writer getWriter() {
+        return new OutputStreamWriter(System.out);
     }
 
     public void handle(final Meep meep) throws Exception {

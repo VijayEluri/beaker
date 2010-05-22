@@ -1,18 +1,17 @@
 package com.sonatype.beaker.maven3;
 
-import com.sonatype.beaker.core.*;
-import com.sonatype.beaker.lexicon.*;
-import com.sonatype.beaker.lexicon.maven.*;
-import org.apache.commons.beanutils.*;
+import com.sonatype.beaker.core.Group;
 
 /**
- * Rules for when and what to meep.
+ * Rules for when to meep; details of what is meeped is handled by the {@link RuleDelegate}.
  *
  * @author <a href="mailto:jason@planet57.com">Jason Dillon</a>
  * @since 0.1
  */
 public privileged aspect Rules
 {
+    private final RuleDelegate delegate = new RuleDelegate();
+
     /**
      * Capture when an artifact has been resolved.
      */
@@ -23,8 +22,7 @@ public privileged aspect Rules
             org.apache.maven.wagon.events.TransferListener,
             boolean))
     {
-        Object artifact = thisJoinPoint.getArgs()[0];
-        MeepBuilder.meep(new ArtifactResolved(), artifact);
+        delegate.artifactResolved(thisJoinPoint);
     }
 
     /**
@@ -38,12 +36,7 @@ public privileged aspect Rules
         final Group group = new Group("execute-mojo").open();
 
         try {
-            Object execution = thisJoinPoint.getArgs()[1];
-            MeepBuilder.meep(new MojoExecute(), execution);
-            
-            DynaBean bean = new WrapDynaBean(execution);
-            MeepBuilder.meep(new PluginContext(), bean.get("plugin"));
-
+            delegate.goalStarted(thisJoinPoint);
             return proceed();
         }
         finally {
@@ -51,13 +44,15 @@ public privileged aspect Rules
         }
     }
 
+    /**
+     * Capture when an ExecutionEvent is about to be fired.
+     */
     before():
         execution(void org.apache.maven.lifecycle.internal.DefaultExecutionEventCatapult.fire(
             org.apache.maven.execution.ExecutionEvent.Type,
             org.apache.maven.execution.MavenSession,
             org.apache.maven.plugin.MojoExecution))
     {
-        Object type = thisJoinPoint.getArgs()[0];
-        Beaker.meep(new Generic(type));
+        delegate.executionEventFired(thisJoinPoint);
     }
 }
