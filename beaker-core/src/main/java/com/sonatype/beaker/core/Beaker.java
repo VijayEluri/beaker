@@ -1,6 +1,6 @@
 package com.sonatype.beaker.core;
 
-import com.sonatype.beaker.core.handler.DefaultHandler;
+import com.sonatype.beaker.core.handler.NopHandler;
 import com.sonatype.beaker.lexicon.Meep;
 import com.sonatype.beaker.lexicon.MeepContext;
 import com.sonatype.beaker.lexicon.StreamClose;
@@ -56,7 +56,7 @@ public class Beaker
     private Handler createHandler() {
         String classname = System.getProperty(BEAKER_HANDLER);
         if (classname == null) {
-            return new DefaultHandler();
+            return new NopHandler();
         }
 
         try {
@@ -64,8 +64,8 @@ public class Beaker
             return (Handler) type.newInstance();
         }
         catch (Exception e) {
-            log.error("Failed to create handler; using default", e);
-            return new DefaultHandler();
+            log.error("Failed to create handler; using NOP", e);
+            return new NopHandler();
         }
     }
 

@@ -14,11 +14,11 @@ public class StackTrace
 {
     private final StackTraceElement[] elements;
 
-    public StackTrace(StackTraceElement[] elements) {
+    public StackTrace(final StackTraceElement[] elements) {
         this.elements = elements;
     }
 
-    public StackTrace(Throwable cause) {
+    public StackTrace(final Throwable cause) {
         this(cause.getStackTrace());
     }
 
