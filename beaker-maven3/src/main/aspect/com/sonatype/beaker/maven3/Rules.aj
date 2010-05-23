@@ -1,6 +1,10 @@
 package com.sonatype.beaker.maven3;
 
+import groovy.lang.Closure;
+import org.aspectj.lang.JoinPoint;
 import com.sonatype.beaker.core.Group;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Rules for when to meep; details of what is meeped is handled by the {@link RuleDelegate}.
@@ -10,7 +14,24 @@ import com.sonatype.beaker.core.Group;
  */
 public privileged aspect Rules
 {
+    private static final Logger log = LoggerFactory.getLogger(Rules.class);
+
     private final RuleDelegate delegate = new RuleDelegate();
+
+    /**
+     * Handle rule action.
+     *
+     * Provides a safety-net to prevent rule actions from introducing exceptions into the instrumented application's flow.
+     * This is a double-check for sanity, since the delegate is also casting its own net.
+     */
+    private void handle(final Closure action, final JoinPoint point) {
+        try {
+            delegate.handle(action, point);
+        }
+        catch (Throwable t) {
+            log.error("Failed to handle: {}", point, t);
+        }
+    }
 
     /**
      * Capture when Maven execution begins.
@@ -31,7 +52,7 @@ public privileged aspect Rules
             org.apache.maven.execution.MavenSession,
             org.apache.maven.plugin.MojoExecution))
     {
-        delegate.handle(delegate.executionEventFired, thisJoinPoint);
+        handle(delegate.executionEventFired, thisJoinPoint);
     }
 
     /**
@@ -68,7 +89,7 @@ public privileged aspect Rules
             org.apache.maven.wagon.events.TransferListener,
             boolean))
     {
-        delegate.handle(delegate.artifactResolved, thisJoinPoint);
+        handle(delegate.artifactResolved, thisJoinPoint);
     }
 
     /**
@@ -82,7 +103,8 @@ public privileged aspect Rules
         final Group group = new Group("execute-mojo").open();
 
         try {
-            delegate.handle(delegate.goalStarted, thisJoinPoint);
+            handle(delegate.goalStarted, thisJoinPoint);
+            
             return proceed();
         }
         finally {

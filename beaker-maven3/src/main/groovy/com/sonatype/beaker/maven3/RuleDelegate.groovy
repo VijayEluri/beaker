@@ -4,14 +4,13 @@ import org.aspectj.lang.JoinPoint
 import com.sonatype.beaker.core.Beaker
 import com.sonatype.beaker.lexicon.Generic
 import com.sonatype.beaker.lexicon.maven.PluginContext
-import com.sonatype.beaker.core.MeepBuilder
 import com.sonatype.beaker.lexicon.maven.MojoExecute
 import com.sonatype.beaker.lexicon.maven.ArtifactResolved
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 /**
- * ???
+ * Provides the actions to execute for defined rules.
  *
  * @author <a href="mailto:jason@planet57.com">Jason Dillon</a>
  * @since 0.1
@@ -20,34 +19,58 @@ class RuleDelegate
 {
     private static final Logger log = LoggerFactory.getLogger(RuleDelegate.class);
 
-    private def onError(final JoinPoint point, final Throwable cause) {
-        log.error("Failed to handle: {}", point, cause)
-        // cause.printStackTrace()
+    /**
+     * Copy properties from source to target.
+     */
+    private def copy(def source, def target) {
+        target.metaClass.properties.each {
+            if (source.metaClass.hasProperty(source, it.name) && it.name != 'metaClass' && it.name != 'class') {
+                it.setProperty(target, source.metaClass.getProperty(source, it.name))
+            }
+        }
+
+        return target
     }
 
-    def handle(Closure action, JoinPoint point) {
+    /**
+     * Emmit a meep; de-typed here to prevent IDE turds.
+     */
+    private def meep(def meep) {
+        Beaker.meep(meep)
+    }
+
+    /**
+     * Main entry-point for rules to execute an action.
+     *
+     * Provides a safety-net to prevent rule actions from introducing exceptions into the instrumented application's flow.
+     */
+    public def handle(final Closure action, final JoinPoint point) {
         try {
-            assert action != null
-            assert point != null
+            assert action != null && point != null
             action.call(point)
         }
         catch (Throwable t) {
-            onError(point, t)
+            log.error("Failed to handle: {}", point, t)
         }
     }
 
-    public Closure artifactResolved = { JoinPoint point ->
+    //
+    // Actions; these need to be typed as "public Closure" specifically so that AspectJ can find the fields.
+    // Each action takes a single argument; which is an AspectJ JoinPoint instance.
+    //
+
+    public Closure artifactResolved = { point ->
         def artifact = point.args[0]
-        MeepBuilder.meep(new ArtifactResolved(), artifact)
+        meep(copy(artifact, new ArtifactResolved()))
     }
 
-    public Closure goalStarted = { JoinPoint point ->
+    public Closure goalStarted = { point ->
         def execution = point.args[1]
-        MeepBuilder.meep(new MojoExecute(), execution)
-        MeepBuilder.meep(new PluginContext(), execution.plugin)
+        meep(copy(execution, new MojoExecute()))
+        meep(copy(execution.plugin, new PluginContext()))
     }
 
-    public Closure executionEventFired = { JoinPoint point ->
+    public Closure executionEventFired = { point ->
         def type = point.args[0]
         def session = point.args[1]
         def execution = point.args[2]
@@ -55,25 +78,25 @@ class RuleDelegate
         Beaker.meep(new Generic(type))
 
         /*
-         Types:
-            ProjectDiscoveryStarted,
-            SessionStarted,
-            SessionEnded,
-            ProjectSkipped,
-            ProjectStarted,
-            ProjectSucceeded,
-            ProjectFailed,
-            MojoSkipped,
-            MojoStarted,
-            MojoSucceeded,
-            MojoFailed,
-            ForkStarted,
-            ForkSucceeded,
-            ForkFailed,
-            ForkedProjectStarted,
-            ForkedProjectSucceeded,
-            ForkedProjectFailed;
-         */
+        Types:
+           ProjectDiscoveryStarted,
+           SessionStarted,
+           SessionEnded,
+           ProjectSkipped,
+           ProjectStarted,
+           ProjectSucceeded,
+           ProjectFailed,
+           MojoSkipped,
+           MojoStarted,
+           MojoSucceeded,
+           MojoFailed,
+           ForkStarted,
+           ForkSucceeded,
+           ForkFailed,
+           ForkedProjectStarted,
+           ForkedProjectSucceeded,
+           ForkedProjectFailed;
+        */
 
         switch ("$type") {
             case "SessionStarted":
