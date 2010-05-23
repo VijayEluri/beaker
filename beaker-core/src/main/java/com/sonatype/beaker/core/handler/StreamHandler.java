@@ -36,9 +36,11 @@ public class StreamHandler
 
     public synchronized void handle(final Meep meep) throws Exception {
         assert meep != null;
-        xstream.toXML(meep, out);
-        out.append("\n");
-        out.flush();
+        synchronized (out) {
+            xstream.toXML(meep, out);
+            out.append("\n");
+            out.flush();
+        }
     }
 
     public synchronized void stop() throws Exception {

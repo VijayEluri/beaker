@@ -13,6 +13,52 @@ public privileged aspect Rules
     private final RuleDelegate delegate = new RuleDelegate();
 
     /**
+     * Capture when Maven execution begins.
+     */
+    before():
+        execution(org.apache.execution.MavenExecutionResult org.apache.maven.DefaultMaven.doExecute(
+            org.apache.execution.MavenExecutionRequest))
+    {
+        // TODO:
+    }
+
+    /**
+     * Capture when an ExecutionEvent is about to be fired.
+     */
+    before():
+        execution(void org.apache.maven.lifecycle.internal.DefaultExecutionEventCatapult.fire(
+            org.apache.maven.execution.ExecutionEvent.Type,
+            org.apache.maven.execution.MavenSession,
+            org.apache.maven.plugin.MojoExecution))
+    {
+        delegate.handle(delegate.executionEventFired, thisJoinPoint);
+    }
+
+    /**
+     * Capture when a Maven session begins.
+     */
+    before():
+        execution(void org.apache.maven.lifecycle.internal.LifecycleStarter.execute(
+            org.apache.maven.execution.MavenSession))
+    {
+        // TODO:
+    }
+
+    /**
+     * Capture when a mojo is executed.
+     */
+    before():
+        execution(void org.apache.maven.lifecycle.internal.MojoExecutor.execute(
+            org.apache.maven.execution.MavenSession,
+            org.apache.maven.plugin.MojoExecution,
+            org.apache.maven.lifecycle.internal.ProjectIndex,
+            org.apache.maven.lifecycle.internal.DependencyContext,
+            org.apache.maven.lifecycle.internal.PhaseRecorder))
+    {
+        // TODO:
+    }
+
+    /**
      * Capture when an artifact has been resolved.
      */
     after() returning:
@@ -22,7 +68,7 @@ public privileged aspect Rules
             org.apache.maven.wagon.events.TransferListener,
             boolean))
     {
-        delegate.artifactResolved(thisJoinPoint);
+        delegate.handle(delegate.artifactResolved, thisJoinPoint);
     }
 
     /**
@@ -36,23 +82,11 @@ public privileged aspect Rules
         final Group group = new Group("execute-mojo").open();
 
         try {
-            delegate.goalStarted(thisJoinPoint);
+            delegate.handle(delegate.goalStarted, thisJoinPoint);
             return proceed();
         }
         finally {
             group.close();
         }
-    }
-
-    /**
-     * Capture when an ExecutionEvent is about to be fired.
-     */
-    before():
-        execution(void org.apache.maven.lifecycle.internal.DefaultExecutionEventCatapult.fire(
-            org.apache.maven.execution.ExecutionEvent.Type,
-            org.apache.maven.execution.MavenSession,
-            org.apache.maven.plugin.MojoExecution))
-    {
-        delegate.executionEventFired(thisJoinPoint);
     }
 }

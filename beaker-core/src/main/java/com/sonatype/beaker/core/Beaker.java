@@ -24,13 +24,15 @@ public class Beaker
 
     private final AtomicLong meepCounter = new AtomicLong(0);
 
-    private final Handler handler = createHandler();
+    private Handler handler;
 
     private Beaker() {
         startup();
     }
 
     private void startup() {
+        log.info("Starting");
+
         consume(new StreamOpen());
 
         Runtime.getRuntime().addShutdownHook(new Thread("beaker-shutdown")
@@ -43,14 +45,24 @@ public class Beaker
     }
 
     private void shutdown() {
+        log.info("Stopping");
+
+        // Final meep
         consume(new StreamClose(getMeepCount(), Group.getCount()));
 
+        // Display a summary
+        log.info("Meep count: {}", getMeepCount());
+        log.info("Group count: {}", Group.getCount());
+        
+        // Stop the handler
         try {
             getHandler().stop();
         }
         catch (Exception e) {
             log.error("Failed to stop handler", e);
         }
+
+        log.info("Stopped");
     }
 
     private Handler createHandler() {
@@ -70,6 +82,9 @@ public class Beaker
     }
 
     public Handler getHandler() {
+        if (handler == null) {
+            handler = createHandler();
+        }
         return handler;
     }
 
@@ -80,6 +95,8 @@ public class Beaker
     private void consume(final Meep meep) {
         assert meep != null;
 
+        log.trace("Consuming: {}", meep);
+        
         // Install the meep context
         installContext(meep);
 
@@ -110,6 +127,7 @@ public class Beaker
         if (instance == null) {
             try {
                 instance = new Beaker();
+                log.info("Ready");
             }
             catch (Exception e) {
                 log.error("Failed to initialize", e);

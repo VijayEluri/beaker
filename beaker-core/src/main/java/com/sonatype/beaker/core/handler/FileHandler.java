@@ -18,7 +18,7 @@ import java.io.Writer;
 public class FileHandler
     extends StreamHandler
 {
-    public static final String FILE_OUTPUT = "beaker.handler.file.output";
+    public static final String FILE = "beaker.handler.file";
 
     private static final Logger log = LoggerFactory.getLogger(FileHandler.class);
 
@@ -35,7 +35,7 @@ public class FileHandler
     }
 
     private File getFile() throws IOException {
-        String filename = System.getProperty(FILE_OUTPUT);
+        String filename = System.getProperty(FILE);
         File file;
         if (filename == null) {
             file = File.createTempFile("beaker", ".xml");
