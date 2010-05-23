@@ -97,24 +97,22 @@ public class Beaker
 
         log.trace("Consuming: {}", meep);
         
-        // Install the meep context
-        installContext(meep);
-
         try {
             // Handle the meep
-            getHandler().handle(meep);
+            getHandler().handle(context(meep));
         }
         catch (Exception e) {
             log.error("Failed to handle: {}", meep, e);
         }
     }
 
-    private void installContext(final Meep meep) {
+    private MeepContext context(final Meep meep) {
         assert meep != null;
-        MeepContext ctx = meep.getContext();
+        MeepContext ctx = new MeepContext(meep);
         ctx.setId(meepCounter.incrementAndGet());
         ctx.setGroupId(Group.currentId());
         ctx.setThread(Thread.currentThread());
+        return ctx;
     }
 
     //

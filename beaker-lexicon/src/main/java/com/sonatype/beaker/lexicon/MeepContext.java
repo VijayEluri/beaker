@@ -1,5 +1,6 @@
 package com.sonatype.beaker.lexicon;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 /**
@@ -8,7 +9,9 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
  * @author <a href="mailto:jason@planet57.com">Jason Dillon</a>
  * @since 0.1
  */
+@XStreamAlias("meep")
 public class MeepContext
+    implements Meep
 {
     @XStreamAsAttribute
     private long id;
@@ -18,6 +21,13 @@ public class MeepContext
 
     @XStreamAsAttribute
     private String thread;
+
+    private final Meep detail;
+
+    public MeepContext(final Meep detail) {
+        assert detail != null;
+        this.detail = detail;
+    }
 
     public long getId() {
         return id;
@@ -50,5 +60,9 @@ public class MeepContext
     public void setThread(final Thread thread) {
         assert thread != null;
         setThread(thread.getName());
+    }
+
+    public Meep getDetail() {
+        return detail;
     }
 }

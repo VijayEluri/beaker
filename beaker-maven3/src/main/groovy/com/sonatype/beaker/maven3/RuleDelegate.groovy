@@ -8,6 +8,9 @@ import com.sonatype.beaker.lexicon.maven.MojoExecute
 import com.sonatype.beaker.lexicon.maven.ArtifactResolved
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import com.sonatype.beaker.lexicon.maven.SessionStarted
+import com.sonatype.beaker.lexicon.maven.MojoStarted
+import com.sonatype.beaker.lexicon.maven.ProjectStarted
 
 /**
  * Provides the actions to execute for defined rules.
@@ -75,8 +78,6 @@ class RuleDelegate
         def session = point.args[1]
         def execution = point.args[2]
 
-        Beaker.meep(new Generic(type))
-
         /*
         Types:
            ProjectDiscoveryStarted,
@@ -98,9 +99,29 @@ class RuleDelegate
            ForkedProjectFailed;
         */
 
+        // FIXME: *Started -> push, *{Skipped,Succeeded,Failed} -> pop
+
         switch ("$type") {
             case "SessionStarted":
-                Beaker.meep(new Generic(session.request.pom))
+                meep(copy(session.request, new SessionStarted()))
+                break
+
+            case "ProjectStarted":
+                meep(copy(session.currentProject, new ProjectStarted()))
+                break
+
+            case "MojoStarted":
+                def meep = new MojoStarted()
+                meep.goal = execution.goal
+                meep.executionId = execution.executionId
+                meep.plugin.groupId = execution.plugin.groupId
+                meep.plugin.artifactId = execution.plugin.artifactId
+                meep.plugin.version = execution.plugin.version
+                Beaker.meep(meep)
+                break
+
+            default:
+                Beaker.meep(new Generic(type))
                 break
         }
     }

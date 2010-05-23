@@ -8,5 +8,4 @@ package com.sonatype.beaker.lexicon;
  */
 public interface Meep
 {
-    MeepContext getContext();
 }
