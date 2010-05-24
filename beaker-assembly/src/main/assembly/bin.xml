@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<assembly>
+    <id>bin</id>
+
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <fileSets>
+        <fileSet>
+            <directory>src/main/underlay</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>*.txt</include>
+                <include>examples/**</include>
+            </includes>
+        </fileSet>
+
+        <fileSet>
+            <directory>src/main/underlay/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <includes>
+                <include>xmvn.bat</include>
+            </includes>
+            <lineEnding>dos</lineEnding>
+        </fileSet>
+
+        <fileSet>
+            <directory>src/main/underlay/bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <includes>
+                <include>xmvn</include>
+            </includes>
+            <lineEnding>unix</lineEnding>
+            <fileMode>0755</fileMode>
+        </fileSet>
+
+        <fileSet>
+            <directory>src/main/underlay/etc</directory>
+            <outputDirectory>etc</outputDirectory>
+        </fileSet>
+    </fileSets>
+
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+            <useStrictFiltering>true</useStrictFiltering>
+            <excludes>
+                <exclude>com.sonatype.beaker:beaker-maven-3-agent</exclude>
+            </excludes>
+        </dependencySet>
+
+        <dependencySet>
+            <outputDirectory>agent</outputDirectory>
+            <useStrictFiltering>true</useStrictFiltering>
+            <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
+
+            <includes>
+                <include>com.sonatype.beaker:beaker-maven-3-agent</include>
+            </includes>
+        </dependencySet>
+    </dependencySets>
+</assembly>
