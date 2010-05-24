@@ -26,6 +26,7 @@ public class Group
 
     public Group(final String name) {
         this.id = counter.incrementAndGet();
+        // name is optional
         this.name = name;
     }
 

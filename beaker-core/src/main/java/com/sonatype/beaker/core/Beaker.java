@@ -123,7 +123,7 @@ public class Beaker
     }
 
     public static void push() {
-        new Group(null).open();
+        push(null);
     }
 
     public static void push(final String name) {

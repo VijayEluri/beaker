@@ -36,15 +36,7 @@ public class Meep
         this.detail = detail;
         this.id = counter.incrementAndGet();
         this.group = Group.currentId();
-
-        // Only set thread when its not "main"
-        String tmp = Thread.currentThread().getName();
-        if (!"main".equals(tmp)) {
-            this.thread = tmp;
-        }
-        else {
-            this.thread = null;
-        }
+        this.thread = Thread.currentThread().getName();
     }
 
     public long getId() {
