@@ -27,6 +27,14 @@ public class StreamHandler
 
     private final XStream xstream;
 
+    //
+    // TODO: Add checksum (for entire stream, not each meep)
+    //
+
+    //
+    // TODO: Allow stream to be compressed on the fly.
+    //
+    
     public StreamHandler() {
         this.xstream = new XStream();
         this.xstream.autodetectAnnotations(true);
@@ -44,10 +52,6 @@ public class StreamHandler
 
     public synchronized void handle(final Meep meep) throws Exception {
         assert meep != null;
-
-        //
-        // TODO: Add checksum (for entire stream, not each meep)
-        //
 
         String xml = xstream.toXML(meep);
 

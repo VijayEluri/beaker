@@ -17,4 +17,33 @@
     <artifactId>beaker-tools</artifactId>
     <name>Beaker Tools</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.sonatype.beaker</groupId>
+            <artifactId>beaker-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sonatype.beaker</groupId>
+            <artifactId>beaker-maven-lexicon</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.sonatype.beaker.tools.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

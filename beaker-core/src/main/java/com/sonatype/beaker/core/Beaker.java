@@ -1,5 +1,6 @@
 package com.sonatype.beaker.core;
 
+import com.sonatype.beaker.core.handler.FileHandler;
 import com.sonatype.beaker.core.handler.NopHandler;
 import com.sonatype.beaker.lexicon.StreamClose;
 import com.sonatype.beaker.lexicon.StreamOpen;
@@ -63,6 +64,10 @@ public class Beaker
         String classname = System.getProperty(BEAKER_HANDLER);
         if (classname == null) {
             return new NopHandler();
+        }
+
+        if (classname.equals("file")) {
+            return new FileHandler();
         }
 
         try {
