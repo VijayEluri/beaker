@@ -1,7 +1,7 @@
 Description
 -----------
 
-Sonatype Beaker
+Sonatype Beaker - JavaAgent Assistant Thingy
 
 Building
 --------
