@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory
 import com.sonatype.beaker.lexicon.maven.SessionStarted
 import com.sonatype.beaker.lexicon.maven.MojoStarted
 import com.sonatype.beaker.lexicon.maven.ProjectStarted
+import com.sonatype.beaker.lexicon.Message
 
 /**
  * Provides the actions to execute for defined rules.
@@ -131,12 +132,12 @@ class RuleDelegate
             case "ProjectFailed":
             case "MojoSucceeded":
             case "MojoFailed":
-                Beaker.meep(new Generic(type))
+                Beaker.meep(new Message(type))
                 Beaker.pop()
                 break
 
             default:
-                Beaker.meep(new Generic(type))
+                Beaker.meep(new Message(type))
                 break
         }
     }
