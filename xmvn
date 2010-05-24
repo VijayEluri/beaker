@@ -12,7 +12,7 @@ MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.log.file=`pwd`/beaker.log"
 MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.log.file.threshold=TRACE"
 
 MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.handler=com.sonatype.beaker.core.handler.FileHandler"
-MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.handler.file=`pwd`/beaker.xml"
+MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.handler.file=`pwd`/beaker.xmeep"
 
 export MAVEN_OPTS
 
