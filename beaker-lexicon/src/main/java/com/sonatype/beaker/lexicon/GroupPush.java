@@ -20,7 +20,6 @@ public class GroupPush
 
     public GroupPush(final long id, final String name) {
         this.id = id;
-        assert name != null;
         this.name = name;
     }
 

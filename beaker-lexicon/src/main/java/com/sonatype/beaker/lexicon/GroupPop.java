@@ -20,7 +20,6 @@ public class GroupPop
 
     public GroupPop(final long id, final String name) {
         this.id = id;
-        assert name != null;
         this.name = name;
     }
 
