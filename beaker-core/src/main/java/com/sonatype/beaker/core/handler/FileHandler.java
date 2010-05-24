@@ -52,7 +52,11 @@ public class FileHandler
 
     @Override
     public void stop() throws Exception {
-        super.stop();
-        getOut().close();
+        try {
+            super.stop();
+        }
+        finally {
+            getOut().close();
+        }
     }
 }
