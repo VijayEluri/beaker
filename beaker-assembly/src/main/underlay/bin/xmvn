@@ -34,7 +34,7 @@ if [ -z "$BEAKER_HOME" ]; then
 fi
 
 if [ -z "$BEAKER_HANDLER_FILE" ]; then
-    BEAKER_HANDLER_FILE="`pwd`/beaker.xmeep"
+    BEAKER_HANDLER_FILE="`pwd`/beaker.xmeep.gz"
 fi
 
 if [ -z "$BEAKER_LOG_FILE" ]; then

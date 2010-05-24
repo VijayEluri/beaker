@@ -5,9 +5,12 @@ import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.zip.GZIPOutputStream;
 
 /**
  * ???
@@ -23,14 +26,14 @@ public class FileHandler
     private static final Logger log = LoggerFactory.getLogger(FileHandler.class);
 
     @Override
-    protected Writer getWriter() {
-        try {
-            File file = getFile();
-            log.info("Output file: {}", file);
-            return new BufferedWriter(new FileWriter(file));
+    protected Writer createWriter() throws IOException {
+        File file = getFile();
+        log.info("Output file: {}", file);
+        if (file.getName().endsWith(".gz")) {
+            return new OutputStreamWriter(new GZIPOutputStream(new FileOutputStream(file)));
         }
-        catch (IOException e) {
-            throw new RuntimeException(e);
+        else {
+            return new BufferedWriter(new FileWriter(file));
         }
     }
 
@@ -45,5 +48,11 @@ public class FileHandler
         }
         file.getParentFile().mkdirs();
         return file;
+    }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        getOut().close();
     }
 }

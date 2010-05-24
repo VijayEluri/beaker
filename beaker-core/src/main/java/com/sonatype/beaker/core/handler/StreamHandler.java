@@ -10,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.zip.Adler32;
-import java.util.zip.Checksum;
 
 /**
  * ???
@@ -32,17 +30,12 @@ public class StreamHandler
     // TODO: Add checksum (for entire stream, not each meep)
     //
 
-    //
-    // TODO: Allow stream to be compressed on the fly.
-    //
-    
     public StreamHandler() {
         this.xstream = new XStream(new XppDriver());
         this.xstream.autodetectAnnotations(true);
-        this.out = getWriter();
 
-        // HACK
         try {
+            this.out = createWriter();
             writeHeader();
         }
         catch (IOException e) {
@@ -50,8 +43,12 @@ public class StreamHandler
         }
     }
 
-    protected Writer getWriter() {
+    protected Writer createWriter() throws IOException {
         return new OutputStreamWriter(System.out);
+    }
+
+    public Writer getOut() {
+        return out;
     }
 
     protected void writeHeader() throws IOException {

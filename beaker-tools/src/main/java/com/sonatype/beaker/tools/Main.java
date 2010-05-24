@@ -10,8 +10,10 @@ import java.io.BufferedInputStream;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.Stack;
+import java.util.zip.GZIPInputStream;
 
 /**
  * ???
@@ -45,7 +47,16 @@ public class Main
             SessionStarted.class
         });
 
-        ObjectInputStream input = xstream.createObjectInputStream(new BufferedInputStream(new FileInputStream(file)));
+        InputStream stream;
+
+        if (file.getName().endsWith(".gz")) {
+            stream = new GZIPInputStream(new FileInputStream(file));
+        }
+        else {
+            stream = new BufferedInputStream(new FileInputStream(file));
+        }
+
+        ObjectInputStream input = xstream.createObjectInputStream(stream);
 
         Stack<Long> group = new Stack<Long>();
 
