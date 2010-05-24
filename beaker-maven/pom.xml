@@ -20,7 +20,7 @@
 
     <modules>
         <module>beaker-maven-lexicon</module>
-        <module>beaker-maven-3-agent</module>
+        <module>beaker-maven-3</module>
     </modules>
 
 </project>

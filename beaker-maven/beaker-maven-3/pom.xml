@@ -14,8 +14,8 @@
         <version>0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>beaker-maven-3-agent</artifactId>
-    <name>Beaker Maven :: Maven 3 Agent</name>
+    <artifactId>beaker-maven-3</artifactId>
+    <name>Beaker Maven :: Maven 3</name>
 
     <dependencies>
         <dependency>
@@ -99,6 +99,8 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <shadedClassifierName>agent</shadedClassifierName>
                             <artifactSet>
                                 <excludes>
                                     <exclude>org.aspectj:aspectjrt</exclude>

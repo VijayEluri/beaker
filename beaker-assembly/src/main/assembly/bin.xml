@@ -49,7 +49,7 @@
             <outputDirectory>lib</outputDirectory>
             <useStrictFiltering>true</useStrictFiltering>
             <excludes>
-                <exclude>com.sonatype.beaker:beaker-maven-3-agent</exclude>
+                <exclude>com.sonatype.beaker:beaker-maven-3:jar:agent</exclude>
                 <exclude>com.sonatype.beaker:beaker-tools</exclude>
             </excludes>
         </dependencySet>
@@ -66,9 +66,9 @@
         <dependencySet>
             <outputDirectory>agent</outputDirectory>
             <useStrictFiltering>true</useStrictFiltering>
-            <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
+            <outputFileNameMapping>${artifact.artifactId}${dashClassifier?}.${artifact.extension}</outputFileNameMapping>
             <includes>
-                <include>com.sonatype.beaker:beaker-maven-3-agent</include>
+                <include>com.sonatype.beaker:beaker-maven-3:jar:agent</include>
             </includes>
         </dependencySet>
     </dependencySets>

@@ -102,7 +102,14 @@
             
             <dependency>
                 <groupId>com.sonatype.beaker</groupId>
-                <artifactId>beaker-maven-3-agent</artifactId>
+                <artifactId>beaker-maven-3</artifactId>
+                <version>0.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sonatype.beaker</groupId>
+                <artifactId>beaker-maven-3</artifactId>
+                <classifier>agent</classifier>
                 <version>0.1-SNAPSHOT</version>
             </dependency>
 
