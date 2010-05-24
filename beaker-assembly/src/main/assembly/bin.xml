@@ -22,6 +22,7 @@
             <outputDirectory>bin</outputDirectory>
             <includes>
                 <include>xmvn.bat</include>
+                <include>beaker.bat</include>
             </includes>
             <lineEnding>dos</lineEnding>
         </fileSet>
@@ -31,6 +32,7 @@
             <outputDirectory>bin</outputDirectory>
             <includes>
                 <include>xmvn</include>
+                <include>beaker</include>
             </includes>
             <lineEnding>unix</lineEnding>
             <fileMode>0755</fileMode>
@@ -48,14 +50,23 @@
             <useStrictFiltering>true</useStrictFiltering>
             <excludes>
                 <exclude>com.sonatype.beaker:beaker-maven-3-agent</exclude>
+                <exclude>com.sonatype.beaker:beaker-tools</exclude>
             </excludes>
+        </dependencySet>
+
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+            <useStrictFiltering>true</useStrictFiltering>
+            <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
+            <includes>
+                <include>com.sonatype.beaker:beaker-tools</include>
+            </includes>
         </dependencySet>
 
         <dependencySet>
             <outputDirectory>agent</outputDirectory>
             <useStrictFiltering>true</useStrictFiltering>
             <outputFileNameMapping>${artifact.artifactId}.${artifact.extension}</outputFileNameMapping>
-
             <includes>
                 <include>com.sonatype.beaker:beaker-maven-3-agent</include>
             </includes>
