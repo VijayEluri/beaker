@@ -74,7 +74,7 @@ class RuleDelegate
     }
 
     public Closure executionEventFired = { point ->
-        def type = point.args[0]
+        def type = point.args[0] as String
         def session = point.args[1]
         def execution = point.args[2]
 
@@ -101,19 +101,19 @@ class RuleDelegate
 
         // FIXME: *Started -> push, *{Succeeded,Failed} -> pop, *Skipped -> ?
 
-        switch ("$type") {
+        switch (type) {
             case "SessionStarted":
-                Beaker.push()
+                Beaker.push(type)
                 meep(copy(session.request, new SessionStarted()))
                 break
 
             case "ProjectStarted":
-                Beaker.push()
+                Beaker.push(type)
                 meep(copy(session.currentProject, new ProjectStarted()))
                 break
 
             case "MojoStarted":
-                Beaker.push()
+                Beaker.push(type)
 
                 def meep = new MojoStarted()
                 meep.goal = execution.goal
