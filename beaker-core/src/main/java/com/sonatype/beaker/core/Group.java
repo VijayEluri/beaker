@@ -80,25 +80,30 @@ public class Group
     // Group Stack
     //
 
-    // FIXME: This needs to be a thread-local (inheritable)
-    private static final Stack<Group> groups = new Stack<Group>();
+    private static final InheritableThreadLocal<Stack<Group>> groups = new InheritableThreadLocal<Stack<Group>>()
+    {
+        @Override
+        protected Stack<Group> initialValue() {
+            return new Stack<Group>();
+        }
+    };
 
     public static Stack<Group> groups() {
-        return groups;
+        return groups.get();
     }
 
     public static Group current() {
-        if (groups.isEmpty()) {
+        if (groups().isEmpty()) {
             return null;
         }
-        return groups.peek();
+        return groups().peek();
     }
 
     public static Long currentId() {
-        if (groups.isEmpty()) {
+        if (groups().isEmpty()) {
             return null;
         }
-        return groups.peek().getId();
+        return groups().peek().getId();
     }
 
     public static long getCount() {
@@ -106,10 +111,10 @@ public class Group
     }
 
     public static Group pop() {
-        return groups.pop();
+        return groups().pop();
     }
 
     public static void push(final Group group) {
-        groups.push(group);
+        groups().push(group);
     }
 }
