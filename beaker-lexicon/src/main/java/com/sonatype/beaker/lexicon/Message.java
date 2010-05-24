@@ -24,4 +24,11 @@ public class Message
     public String getDetail() {
         return detail;
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+            "detail='" + detail + '\'' +
+            '}';
+    }
 }

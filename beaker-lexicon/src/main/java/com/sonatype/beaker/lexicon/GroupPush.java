@@ -30,4 +30,12 @@ public class GroupPush
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "GroupPush{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            '}';
+    }
 }

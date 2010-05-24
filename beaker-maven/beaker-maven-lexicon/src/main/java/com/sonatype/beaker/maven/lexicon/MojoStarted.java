@@ -46,4 +46,13 @@ public class MojoStarted
     public void setPlugin(PluginContext plugin) {
         this.plugin = plugin;
     }
+
+    @Override
+    public String toString() {
+        return "MojoStarted{" +
+            "goal='" + goal + '\'' +
+            ", executionId='" + executionId + '\'' +
+            ", plugin=" + plugin +
+            '}';
+    }
 }

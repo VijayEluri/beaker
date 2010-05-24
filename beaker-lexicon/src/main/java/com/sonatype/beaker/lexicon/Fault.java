@@ -37,4 +37,12 @@ public class Fault
     public Throwable getCause() {
         return cause;
     }
+
+    @Override
+    public String toString() {
+        return "Fault{" +
+            "message='" + message + '\'' +
+            ", cause=" + cause +
+            '}';
+    }
 }

@@ -3,6 +3,7 @@ package com.sonatype.beaker.core.handler;
 import com.sonatype.beaker.core.Handler;
 import com.sonatype.beaker.core.Meep;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.XppDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,18 +37,34 @@ public class StreamHandler
     //
     
     public StreamHandler() {
-        this.xstream = new XStream();
+        this.xstream = new XStream(new XppDriver());
         this.xstream.autodetectAnnotations(true);
         this.out = getWriter();
-    }
 
-    private void writeHeader() throws IOException {
-        out.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-        out.flush();
+        // HACK
+        try {
+            writeHeader();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     protected Writer getWriter() {
         return new OutputStreamWriter(System.out);
+    }
+
+    protected void writeHeader() throws IOException {
+        // HACK
+        out.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        out.append("<meep-stream>\n");
+        out.flush();
+    }
+
+    protected void writeFooter() throws IOException {
+        // HACK
+        out.append("</meep-stream>\n");
+        out.flush();
     }
 
     public synchronized void handle(final Meep meep) throws Exception {
@@ -62,6 +79,7 @@ public class StreamHandler
     }
 
     public synchronized void stop() throws Exception {
+        writeFooter();
         out.flush();
     }
 }

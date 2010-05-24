@@ -32,15 +32,15 @@ public privileged aspect Rules
         }
     }
 
-    /**
-     * Capture when Maven execution begins.
-     */
-    before():
-        execution(org.apache.execution.MavenExecutionResult org.apache.maven.DefaultMaven.doExecute(
-            org.apache.execution.MavenExecutionRequest))
-    {
-        // TODO:
-    }
+//    /**
+//     * Capture when Maven execution begins.
+//     */
+//    before():
+//        execution(org.apache.execution.MavenExecutionResult org.apache.maven.DefaultMaven.doExecute(
+//            org.apache.execution.MavenExecutionRequest))
+//    {
+//        // TODO:
+//    }
 
     /**
      * Capture when an ExecutionEvent is about to be fired.
@@ -54,29 +54,29 @@ public privileged aspect Rules
         handle(delegate.executionEventFired, thisJoinPoint);
     }
 
-    /**
-     * Capture when a Maven session begins.
-     */
-    before():
-        execution(void org.apache.maven.lifecycle.internal.LifecycleStarter.execute(
-            org.apache.maven.execution.MavenSession))
-    {
-        // TODO:
-    }
+//    /**
+//     * Capture when a Maven session begins.
+//     */
+//    before():
+//        execution(void org.apache.maven.lifecycle.internal.LifecycleStarter.execute(
+//            org.apache.maven.execution.MavenSession))
+//    {
+//        // TODO:
+//    }
 
-    /**
-     * Capture when a mojo is executed.
-     */
-    before():
-        execution(void org.apache.maven.lifecycle.internal.MojoExecutor.execute(
-            org.apache.maven.execution.MavenSession,
-            org.apache.maven.plugin.MojoExecution,
-            org.apache.maven.lifecycle.internal.ProjectIndex,
-            org.apache.maven.lifecycle.internal.DependencyContext,
-            org.apache.maven.lifecycle.internal.PhaseRecorder))
-    {
-        // TODO:
-    }
+//    /**
+//     * Capture when a mojo is executed.
+//     */
+//    before():
+//        execution(void org.apache.maven.lifecycle.internal.MojoExecutor.execute(
+//            org.apache.maven.execution.MavenSession,
+//            org.apache.maven.plugin.MojoExecution,
+//            org.apache.maven.lifecycle.internal.ProjectIndex,
+//            org.apache.maven.lifecycle.internal.DependencyContext,
+//            org.apache.maven.lifecycle.internal.PhaseRecorder))
+//    {
+//        // TODO:
+//    }
 
     /**
      * Capture when an artifact has been resolved.

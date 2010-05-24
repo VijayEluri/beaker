@@ -22,4 +22,11 @@ public class Generic
     public Object getDetail() {
         return detail;
     }
+
+    @Override
+    public String toString() {
+        return "Generic{" +
+            "detail=" + detail +
+            '}';
+    }
 }

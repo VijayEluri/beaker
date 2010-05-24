@@ -44,4 +44,13 @@ public class PluginContext
     public void setVersion(String version) {
         this.version = version;
     }
+
+    @Override
+    public String toString() {
+        return "PluginContext{" +
+            "groupId='" + groupId + '\'' +
+            ", artifactId='" + artifactId + '\'' +
+            ", version='" + version + '\'' +
+            '}';
+    }
 }

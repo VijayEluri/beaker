@@ -30,4 +30,12 @@ public class GroupPop
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "GroupPop{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            '}';
+    }
 }

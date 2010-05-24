@@ -39,4 +39,13 @@ public class StreamClose
     public long getGroups() {
         return groups;
     }
+
+    @Override
+    public String toString() {
+        return "StreamClose{" +
+            "date=" + date +
+            ", meeps=" + meeps +
+            ", groups=" + groups +
+            '}';
+    }
 }

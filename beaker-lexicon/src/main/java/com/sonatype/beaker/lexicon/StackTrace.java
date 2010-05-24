@@ -2,6 +2,8 @@ package com.sonatype.beaker.lexicon;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+import java.util.Arrays;
+
 /**
  * ???
  *
@@ -28,5 +30,12 @@ public class StackTrace
 
     public StackTraceElement[] getElements() {
         return elements;
+    }
+
+    @Override
+    public String toString() {
+        return "StackTrace{" +
+            "elements=" + (elements == null ? null : Arrays.asList(elements)) +
+            '}';
     }
 }

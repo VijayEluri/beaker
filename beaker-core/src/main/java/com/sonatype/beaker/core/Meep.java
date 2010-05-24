@@ -54,4 +54,14 @@ public class Meep
     public Object getDetail() {
         return detail;
     }
+
+    @Override
+    public String toString() {
+        return "Meep{" +
+            "id=" + id +
+            ", group=" + group +
+            ", thread='" + thread + '\'' +
+            ", detail=" + detail +
+            '}';
+    }
 }

@@ -90,4 +90,9 @@ public class ArtifactResolved
     public void setFile(File file) {
         this.file = file;
     }
+
+    @Override
+    public String toString() {
+        return "ArtifactResolved{" + groupId + ':' + artifactId + ':' + version + ':' + type + ':' + classifier + ':' + scope + "}";
+    }
 }

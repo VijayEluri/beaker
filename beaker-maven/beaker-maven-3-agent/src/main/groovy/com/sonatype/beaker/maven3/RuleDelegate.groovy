@@ -66,12 +66,6 @@ class RuleDelegate
         meep(copy(artifact, new ArtifactResolved()))
     }
 
-    public Closure goalStarted = { point ->
-        def execution = point.args[1]
-        meep(copy(execution, new MojoExecute()))
-        meep(copy(execution.plugin, new PluginContext()))
-    }
-
     public Closure executionEventFired = { point ->
         def type = point.args[0] as String
         def session = point.args[1]
