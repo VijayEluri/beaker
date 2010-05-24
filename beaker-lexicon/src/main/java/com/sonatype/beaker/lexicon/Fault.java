@@ -11,7 +11,6 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
  */
 @XStreamAlias("fault")
 public class Fault
-    extends MeepSupport
 {
     @XStreamAsAttribute
     private final String message;

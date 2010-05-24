@@ -10,7 +10,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  */
 @XStreamAlias("stack-trace")
 public class StackTrace
-    extends MeepSupport
 {
     private final StackTraceElement[] elements;
 

@@ -1,6 +1,5 @@
 package com.sonatype.beaker.lexicon.maven;
 
-import com.sonatype.beaker.lexicon.MeepSupport;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
@@ -17,7 +16,6 @@ import java.util.Properties;
  */
 @XStreamAlias("mojo-started")
 public class MojoStarted
-    extends MeepSupport
 {
     @XStreamAsAttribute
     private String goal;

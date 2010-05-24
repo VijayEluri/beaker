@@ -1,14 +1,10 @@
 package com.sonatype.beaker.core;
 
 import com.sonatype.beaker.core.handler.NopHandler;
-import com.sonatype.beaker.lexicon.Meep;
-import com.sonatype.beaker.lexicon.MeepContext;
 import com.sonatype.beaker.lexicon.StreamClose;
 import com.sonatype.beaker.lexicon.StreamOpen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * ???
@@ -22,8 +18,6 @@ public class Beaker
 
     private static final Logger log = LoggerFactory.getLogger(Beaker.class);
 
-    private final AtomicLong meepCounter = new AtomicLong(0);
-
     private Handler handler;
 
     private Beaker() {
@@ -33,7 +27,7 @@ public class Beaker
     private void startup() {
         log.info("Starting");
 
-        consume(new StreamOpen());
+        handle(new StreamOpen());
 
         Runtime.getRuntime().addShutdownHook(new Thread("beaker-shutdown")
         {
@@ -48,12 +42,8 @@ public class Beaker
         log.info("Stopping");
 
         // Final meep
-        consume(new StreamClose(getMeepCount(), Group.getCount()));
+        handle(new StreamClose(Meep.getCount(), Group.getCount()));
 
-        // Display a summary
-        log.info("Meep count: {}", getMeepCount());
-        log.info("Group count: {}", Group.getCount());
-        
         // Stop the handler
         try {
             getHandler().stop();
@@ -61,6 +51,10 @@ public class Beaker
         catch (Exception e) {
             log.error("Failed to stop handler", e);
         }
+
+        // Display a summary
+        log.info("Meep count: {}", Meep.getCount());
+        log.info("Group count: {}", Group.getCount());
 
         log.info("Stopped");
     }
@@ -88,31 +82,17 @@ public class Beaker
         return handler;
     }
 
-    public long getMeepCount() {
-        return meepCounter.get();
-    }
+    private void handle(final Object detail) {
+        assert detail != null;
 
-    private void consume(final Meep meep) {
-        assert meep != null;
-
-        log.trace("Consuming: {}", meep);
+        log.trace("Handling: {}", detail);
         
         try {
-            // Handle the meep
-            getHandler().handle(context(meep));
+            getHandler().handle(new Meep(detail));
         }
         catch (Exception e) {
-            log.error("Failed to handle: {}", meep, e);
+            log.error("Failed to handle: {}", detail, e);
         }
-    }
-
-    private MeepContext context(final Meep meep) {
-        assert meep != null;
-        MeepContext ctx = new MeepContext(meep);
-        ctx.setId(meepCounter.incrementAndGet());
-        ctx.setGroupId(Group.currentId());
-        ctx.setThread(Thread.currentThread());
-        return ctx;
     }
 
     //
@@ -138,14 +118,19 @@ public class Beaker
     // Main API
     //
 
-    public static void meep(final Meep meep) {
-        assert meep != null;
+    public static void meep(final Object detail) {
+        getInstance().handle(detail);
+    }
 
-        try {
-            getInstance().consume(meep);
-        }
-        catch (Exception e) {
-            log.error("Failed to consume: {}", meep, e);
-        }
+    public static void push() {
+        new Group(null).open();
+    }
+
+    public static void push(final String name) {
+        new Group(name).open();
+    }
+
+    public static void pop() {
+        Group.current().close();
     }
 }

@@ -11,7 +11,6 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
  */
 @XStreamAlias("group-push")
 public class GroupPush
-    extends MeepSupport
 {
     @XStreamAsAttribute
     private final long id;

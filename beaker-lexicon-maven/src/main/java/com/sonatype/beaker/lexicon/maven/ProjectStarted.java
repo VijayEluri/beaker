@@ -1,13 +1,9 @@
 package com.sonatype.beaker.lexicon.maven;
 
-import com.sonatype.beaker.lexicon.MeepSupport;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 import java.io.File;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
 
 /**
  * ???
@@ -17,7 +13,6 @@ import java.util.Properties;
  */
 @XStreamAlias("project-started")
 public class ProjectStarted
-    extends MeepSupport
 {
     @XStreamAsAttribute
     private File file;

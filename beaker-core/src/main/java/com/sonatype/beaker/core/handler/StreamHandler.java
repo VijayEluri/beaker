@@ -1,7 +1,7 @@
 package com.sonatype.beaker.core.handler;
 
 import com.sonatype.beaker.core.Handler;
-import com.sonatype.beaker.lexicon.Meep;
+import com.sonatype.beaker.core.Meep;
 import com.thoughtworks.xstream.XStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

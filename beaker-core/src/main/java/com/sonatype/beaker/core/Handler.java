@@ -1,7 +1,5 @@
 package com.sonatype.beaker.core;
 
-import com.sonatype.beaker.lexicon.Meep;
-
 /**
  * ???
  *

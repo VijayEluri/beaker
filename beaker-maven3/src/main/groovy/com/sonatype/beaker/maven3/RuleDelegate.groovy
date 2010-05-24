@@ -99,25 +99,40 @@ class RuleDelegate
            ForkedProjectFailed;
         */
 
-        // FIXME: *Started -> push, *{Skipped,Succeeded,Failed} -> pop
+        // FIXME: *Started -> push, *{Succeeded,Failed} -> pop, *Skipped -> ?
 
         switch ("$type") {
             case "SessionStarted":
+                Beaker.push()
                 meep(copy(session.request, new SessionStarted()))
                 break
 
             case "ProjectStarted":
+                Beaker.push()
                 meep(copy(session.currentProject, new ProjectStarted()))
                 break
 
             case "MojoStarted":
+                Beaker.push()
+
                 def meep = new MojoStarted()
                 meep.goal = execution.goal
                 meep.executionId = execution.executionId
-                meep.plugin.groupId = execution.plugin.groupId
-                meep.plugin.artifactId = execution.plugin.artifactId
-                meep.plugin.version = execution.plugin.version
+
+                def plugin = execution.plugin
+                meep.plugin.groupId = plugin.groupId
+                meep.plugin.artifactId = plugin.artifactId
+                meep.plugin.version = plugin.version
                 Beaker.meep(meep)
+                break
+
+            case "SessionEnded":
+            case "ProjectSucceeded":
+            case "ProjectFailed":
+            case "MojoSucceeded":
+            case "MojoFailed":
+                Beaker.meep(new Generic(type))
+                Beaker.pop()
                 break
 
             default:

@@ -12,7 +12,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  */
 @XStreamAlias("generic")
 public class Generic
-    extends MeepSupport
 {
     private final Object detail;
 

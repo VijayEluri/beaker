@@ -10,7 +10,6 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  */
 @XStreamAlias("message")
 public class Message
-    extends MeepSupport
 {
     private final String detail;
 

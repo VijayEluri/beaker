@@ -1,6 +1,5 @@
 package com.sonatype.beaker.lexicon.maven;
 
-import com.sonatype.beaker.lexicon.MeepSupport;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
@@ -14,7 +13,6 @@ import java.io.File;
  */
 @XStreamAlias("artifact-resolved")
 public class ArtifactResolved
-    extends MeepSupport
 {
     @XStreamAsAttribute
     private String groupId;

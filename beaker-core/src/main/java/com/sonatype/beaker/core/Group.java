@@ -26,7 +26,6 @@ public class Group
 
     public Group(final String name) {
         this.id = counter.incrementAndGet();
-        assert name != null;
         this.name = name;
     }
 

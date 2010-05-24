@@ -13,7 +13,6 @@ import java.util.Date;
  */
 @XStreamAlias("stream-close")
 public class StreamClose
-    extends MeepSupport
 {
     @XStreamAsAttribute
     private final Date date = new Date();

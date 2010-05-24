@@ -2,7 +2,6 @@ package com.sonatype.beaker.maven3;
 
 import groovy.lang.Closure;
 import org.aspectj.lang.JoinPoint;
-import com.sonatype.beaker.core.Group;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,25 +89,5 @@ public privileged aspect Rules
             boolean))
     {
         handle(delegate.artifactResolved, thisJoinPoint);
-    }
-
-    /**
-     * Capture when a goal has been started.
-     */
-    Object around():
-        execution(void org.apache.maven.plugin.BuildPluginManager.executeMojo(
-            org.apache.maven.execution.MavenSession,
-            org.apache.maven.plugin.MojoExecution))
-    {
-        final Group group = new Group("execute-mojo").open();
-
-        try {
-            handle(delegate.goalStarted, thisJoinPoint);
-            
-            return proceed();
-        }
-        finally {
-            group.close();
-        }
     }
 }

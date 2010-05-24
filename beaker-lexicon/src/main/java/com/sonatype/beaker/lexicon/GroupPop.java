@@ -11,7 +11,6 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
  */
 @XStreamAlias("group-pop")
 public class GroupPop
-    extends MeepSupport
 {
     @XStreamAsAttribute
     private final long id;
