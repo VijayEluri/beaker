@@ -6,8 +6,11 @@ import com.thoughtworks.xstream.XStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.zip.Adler32;
+import java.util.zip.Checksum;
 
 /**
  * ???
@@ -30,15 +33,26 @@ public class StreamHandler
         this.out = getWriter();
     }
 
+    private void writeHeader() throws IOException {
+        out.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        out.flush();
+    }
+
     protected Writer getWriter() {
         return new OutputStreamWriter(System.out);
     }
 
     public synchronized void handle(final Meep meep) throws Exception {
         assert meep != null;
+
+        //
+        // TODO: Add checksum (for entire stream, not each meep)
+        //
+
+        String xml = xstream.toXML(meep);
+
         synchronized (out) {
-            xstream.toXML(meep, out);
-            out.append("\n");
+            out.append(xml).append("\n");
             out.flush();
         }
     }

@@ -23,6 +23,10 @@ class RuleDelegate
 {
     private static final Logger log = LoggerFactory.getLogger(RuleDelegate.class);
 
+    //
+    // TODO: Need to inform Beaker what lexicon we are using
+    //
+    
     /**
      * Copy properties from source to target.
      */
