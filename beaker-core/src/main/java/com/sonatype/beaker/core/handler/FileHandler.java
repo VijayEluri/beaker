@@ -38,7 +38,7 @@ public class FileHandler
         String filename = System.getProperty(FILE);
         File file;
         if (filename == null) {
-            file = File.createTempFile("beaker", ".xmeep");
+            file = File.createTempFile("beaker-", ".xmeep");
         }
         else {
             file = new File(filename);
