@@ -3,7 +3,7 @@ Description
 
 Sonatype Beaker - JavaAgent Assistant Thingy
 
-![Beaker](https://github.com/jdillon/beaker/tree/master/beaker-assembly/art/beaker.jpg)
+![Beaker](https://github.com/jdillon/beaker/raw/master/art/beaker.jpg)
 
 Building
 --------
