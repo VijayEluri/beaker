@@ -96,13 +96,13 @@
             
             <dependency>
                 <groupId>com.sonatype.beaker</groupId>
-                <artifactId>beaker-maven-3</artifactId>
+                <artifactId>beaker-maven3</artifactId>
                 <version>0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>com.sonatype.beaker</groupId>
-                <artifactId>beaker-maven-2</artifactId>
+                <artifactId>beaker-maven2</artifactId>
                 <version>0.1-SNAPSHOT</version>
             </dependency>
 

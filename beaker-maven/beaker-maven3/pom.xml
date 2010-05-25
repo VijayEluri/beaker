@@ -14,8 +14,8 @@
         <version>0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>beaker-maven-2</artifactId>
-    <name>Beaker Maven 2</name>
+    <artifactId>beaker-maven3</artifactId>
+    <name>Beaker Maven 3</name>
 
     <dependencies>
         <dependency>

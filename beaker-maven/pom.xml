@@ -20,8 +20,8 @@
 
     <modules>
         <module>beaker-maven-common</module>
-        <module>beaker-maven-3</module>
-        <module>beaker-maven-2</module>
+        <module>beaker-maven3</module>
+        <module>beaker-maven2</module>
     </modules>
 
 </project>
