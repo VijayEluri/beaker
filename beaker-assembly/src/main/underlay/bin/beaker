@@ -30,7 +30,10 @@ if [ -z "$JAVACMD" ]; then
     fi
 fi
 
-BOOTJAR="$BEAKER_HOME/lib/beaker-tools.jar"
+## FIXME: this should be filtered
+VERSION="0.1-SNAPSHOT"
+
+BOOTJAR="$BEAKER_HOME/lib/beaker-tools-${VERSION}.jar"
 if $cygwin ; then
     BOOTJAR=`cygpath --windows "$BOOTJAR"`
 fi

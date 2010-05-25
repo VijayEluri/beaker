@@ -45,8 +45,11 @@ if [ -z "$MVN" ]; then
     MVN="mvn"
 fi
 
+## FIXME: this should be filtered
+VERSION="0.1-SNAPSHOT"
+
 MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.home=$BEAKER_HOME"
-MAVEN_OPTS="$MAVEN_OPTS -javaagent:$BEAKER_HOME/agent/beaker-maven-3-agent.jar"
+MAVEN_OPTS="$MAVEN_OPTS -javaagent:$BEAKER_HOME/lib/beaker-maven-3-${VERSION}.jar"
 
 #MAVEN_OPTS="$MAVEN_OPTS -Daj.weaving.verbose=true -Dorg.aspectj.weaver.showWeaveInfo=true"
 

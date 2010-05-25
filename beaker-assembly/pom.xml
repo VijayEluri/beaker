@@ -19,35 +19,19 @@
     <packaging>pom</packaging>
 
     <dependencies>
-        <!--<dependency>-->
-            <!--<groupId>com.sonatype.beaker</groupId>-->
-            <!--<artifactId>beaker-core</artifactId>-->
-        <!--</dependency>-->
-        
         <dependency>
             <groupId>com.sonatype.beaker</groupId>
             <artifactId>beaker-tools</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.sonatype.beaker</groupId>
-            <artifactId>beaker-commands</artifactId>
-        </dependency>
-
         <!--<dependency>-->
             <!--<groupId>com.sonatype.beaker</groupId>-->
-            <!--<artifactId>beaker-maven-lexicon</artifactId>-->
+            <!--<artifactId>beaker-commands</artifactId>-->
         <!--</dependency>-->
 
         <dependency>
             <groupId>com.sonatype.beaker</groupId>
             <artifactId>beaker-maven-3</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sonatype.beaker</groupId>
-            <artifactId>beaker-maven-3</artifactId>
-            <classifier>agent</classifier>
         </dependency>
     </dependencies>
 
