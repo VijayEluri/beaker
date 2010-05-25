@@ -21,6 +21,7 @@
     <modules>
         <module>beaker-maven-lexicon</module>
         <module>beaker-maven-3</module>
+        <module>beaker-maven-2</module>
     </modules>
 
 </project>

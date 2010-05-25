@@ -33,6 +33,11 @@
             <groupId>com.sonatype.beaker</groupId>
             <artifactId>beaker-maven-3</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.sonatype.beaker</groupId>
+            <artifactId>beaker-maven-2</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
