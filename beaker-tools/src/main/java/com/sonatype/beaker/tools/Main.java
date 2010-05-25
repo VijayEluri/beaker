@@ -35,8 +35,8 @@ public class Main
             GroupPop.class,
             Message.class,
             StackTrace.class,
-            StreamOpen.class,
-            StreamClose.class
+            Summary.class,
+            Header.class
         });
 
         xstream.processAnnotations(new Class[] {

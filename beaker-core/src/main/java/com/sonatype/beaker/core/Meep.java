@@ -55,6 +55,10 @@ public class Meep
         return detail;
     }
 
+    public Class getDetailType() {
+        return getDetail().getClass();
+    }
+
     @Override
     public String toString() {
         return "Meep{" +

@@ -12,7 +12,7 @@ import java.util.Date;
  * @since 0.1
  */
 @XStreamAlias("stream-close")
-public class StreamClose
+public class Header
 {
     @XStreamAsAttribute
     private final Date date = new Date();
@@ -23,7 +23,7 @@ public class StreamClose
     @XStreamAsAttribute
     private final long groups;
 
-    public StreamClose(final long meeps, final long groups) {
+    public Header(final long meeps, final long groups) {
         this.meeps = meeps + 1; // include ourselves
         this.groups = groups;
     }

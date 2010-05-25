@@ -3,11 +3,13 @@ package com.sonatype.beaker.core.handler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.zip.GZIPOutputStream;
@@ -26,14 +28,14 @@ public class FileHandler
     private static final Logger log = LoggerFactory.getLogger(FileHandler.class);
 
     @Override
-    protected Writer createWriter() throws IOException {
+    protected OutputStream openStream() throws IOException {
         File file = getFile();
         log.info("Output file: {}", file);
         if (file.getName().endsWith(".gz")) {
-            return new OutputStreamWriter(new GZIPOutputStream(new FileOutputStream(file)));
+            return new GZIPOutputStream(new FileOutputStream(file));
         }
         else {
-            return new BufferedWriter(new FileWriter(file));
+            return new BufferedOutputStream(new FileOutputStream(file));
         }
     }
 
@@ -48,15 +50,5 @@ public class FileHandler
         }
         file.getParentFile().mkdirs();
         return file;
-    }
-
-    @Override
-    public void stop() throws Exception {
-        try {
-            super.stop();
-        }
-        finally {
-            getOut().close();
-        }
     }
 }

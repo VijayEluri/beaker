@@ -1,4 +1,6 @@
-package com.sonatype.beaker.core;
+package com.sonatype.beaker.core.handler;
+
+import com.sonatype.beaker.core.Meep;
 
 /**
  * ???
@@ -8,7 +10,9 @@ package com.sonatype.beaker.core;
  */
 public interface Handler
 {
+    void open() throws Exception;
+    
     void handle(Meep meep) throws Exception;
 
-    void stop() throws Exception;
+    void close() throws Exception;
 }

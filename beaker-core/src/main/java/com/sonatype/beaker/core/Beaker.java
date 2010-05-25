@@ -1,9 +1,9 @@
 package com.sonatype.beaker.core;
 
-import com.sonatype.beaker.core.handler.FileHandler;
-import com.sonatype.beaker.core.handler.NopHandler;
-import com.sonatype.beaker.core.lexicon.StreamClose;
-import com.sonatype.beaker.core.lexicon.StreamOpen;
+import com.sonatype.beaker.core.handler.Handler;
+import com.sonatype.beaker.core.handler.HandlerFactory;
+import com.sonatype.beaker.core.lexicon.Header;
+import com.sonatype.beaker.core.lexicon.Summary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,8 +15,6 @@ import org.slf4j.LoggerFactory;
  */
 public class Beaker
 {
-    public static final String BEAKER_HANDLER = "beaker.handler";
-
     private static final Logger log = LoggerFactory.getLogger(Beaker.class);
 
     private Handler handler;
@@ -28,7 +26,7 @@ public class Beaker
     private void startup() {
         log.info("Starting");
 
-        handle(new StreamOpen());
+        handle(new Summary());
 
         Runtime.getRuntime().addShutdownHook(new Thread("beaker-shutdown")
         {
@@ -43,14 +41,13 @@ public class Beaker
         log.info("Stopping");
 
         // Final meep
-        handle(new StreamClose(Meep.getCount(), Group.getCount()));
+        handle(new Header(Meep.getCount(), Group.getCount()));
 
-        // Stop the handler
         try {
-            getHandler().stop();
+            getHandler().close();
         }
         catch (Exception e) {
-            log.error("Failed to stop handler", e);
+            log.error("Failed to close handler", e);
         }
 
         // Display a summary
@@ -60,29 +57,15 @@ public class Beaker
         log.info("Stopped");
     }
 
-    private Handler createHandler() {
-        String classname = System.getProperty(BEAKER_HANDLER);
-        if (classname == null) {
-            return new NopHandler();
-        }
-
-        if (classname.equals("file")) {
-            return new FileHandler();
-        }
-
-        try {
-            Class type = getClass().getClassLoader().loadClass(classname);
-            return (Handler) type.newInstance();
-        }
-        catch (Exception e) {
-            log.error("Failed to create handler; using NOP", e);
-            return new NopHandler();
-        }
-    }
-
     public Handler getHandler() {
         if (handler == null) {
-            handler = createHandler();
+            handler = HandlerFactory.create();
+            try {
+                handler.open();
+            }
+            catch (Exception e) {
+                log.error("Failed to open handler", e);
+            }
         }
         return handler;
     }

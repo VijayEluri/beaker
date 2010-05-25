@@ -1,6 +1,5 @@
 package com.sonatype.beaker.core.handler;
 
-import com.sonatype.beaker.core.Handler;
 import com.sonatype.beaker.core.Meep;
 
 /**
@@ -12,11 +11,15 @@ import com.sonatype.beaker.core.Meep;
 public class NopHandler
     implements Handler
 {
-    public void handle(final Meep meep) throws Exception {
-        // nothing
+    public void open() throws Exception {
+        // empty
     }
 
-    public void stop() throws Exception {
-        // nothing
+    public void handle(Meep meep) throws Exception {
+        // empty
+    }
+
+    public void close() throws Exception {
+        // empty
     }
 }
