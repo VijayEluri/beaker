@@ -25,7 +25,7 @@
 
         <dependency>
             <groupId>com.sonatype.beaker</groupId>
-            <artifactId>beaker-maven-lexicon</artifactId>
+            <artifactId>beaker-maven-common</artifactId>
         </dependency>
     </dependencies>
 

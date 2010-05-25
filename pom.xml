@@ -90,7 +90,7 @@
 
             <dependency>
                 <groupId>com.sonatype.beaker</groupId>
-                <artifactId>beaker-maven-lexicon</artifactId>
+                <artifactId>beaker-maven-common</artifactId>
                 <version>0.1-SNAPSHOT</version>
             </dependency>
             

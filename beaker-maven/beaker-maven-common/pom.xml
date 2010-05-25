@@ -14,8 +14,8 @@
         <version>0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>beaker-maven-lexicon</artifactId>
-    <name>Beaker Maven :: Lexicon</name>
+    <artifactId>beaker-maven-common</artifactId>
+    <name>Beaker Maven Common</name>
 
     <dependencies>
         <dependency>

@@ -15,7 +15,7 @@
     </parent>
 
     <artifactId>beaker-maven-2</artifactId>
-    <name>Beaker Maven :: Maven 2</name>
+    <name>Beaker Maven 2</name>
 
     <dependencies>
         <dependency>
@@ -25,7 +25,7 @@
 
         <dependency>
             <groupId>com.sonatype.beaker</groupId>
-            <artifactId>beaker-maven-lexicon</artifactId>
+            <artifactId>beaker-maven-common</artifactId>
         </dependency>
 
         <dependency>
