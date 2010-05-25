@@ -2,7 +2,7 @@ package com.sonatype.beaker.maven3
 
 import org.aspectj.lang.JoinPoint
 import com.sonatype.beaker.core.Beaker
-import com.sonatype.beaker.lexicon.*
+import com.sonatype.beaker.core.lexicon.*
 import com.sonatype.beaker.maven.lexicon.*
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

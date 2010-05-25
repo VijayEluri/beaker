@@ -84,12 +84,6 @@
 
             <dependency>
                 <groupId>com.sonatype.beaker</groupId>
-                <artifactId>beaker-lexicon</artifactId>
-                <version>0.1-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.sonatype.beaker</groupId>
                 <artifactId>beaker-core</artifactId>
                 <version>0.1-SNAPSHOT</version>
             </dependency>
@@ -134,7 +128,6 @@
     </dependencyManagement>
 
     <modules>
-        <module>beaker-lexicon</module>
         <module>beaker-core</module>
         <module>beaker-maven</module>
         <module>beaker-tools</module>

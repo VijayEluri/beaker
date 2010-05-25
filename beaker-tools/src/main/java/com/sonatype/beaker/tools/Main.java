@@ -1,7 +1,7 @@
 package com.sonatype.beaker.tools;
 
 import com.sonatype.beaker.core.Meep;
-import com.sonatype.beaker.lexicon.*;
+import com.sonatype.beaker.core.lexicon.*;
 import com.sonatype.beaker.maven.lexicon.*;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;

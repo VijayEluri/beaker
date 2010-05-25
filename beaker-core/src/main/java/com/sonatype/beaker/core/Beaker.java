@@ -2,8 +2,8 @@ package com.sonatype.beaker.core;
 
 import com.sonatype.beaker.core.handler.FileHandler;
 import com.sonatype.beaker.core.handler.NopHandler;
-import com.sonatype.beaker.lexicon.StreamClose;
-import com.sonatype.beaker.lexicon.StreamOpen;
+import com.sonatype.beaker.core.lexicon.StreamClose;
+import com.sonatype.beaker.core.lexicon.StreamOpen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

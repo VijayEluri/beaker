@@ -1,4 +1,4 @@
-package com.sonatype.beaker.lexicon;
+package com.sonatype.beaker.core.lexicon;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;

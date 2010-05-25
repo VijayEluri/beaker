@@ -19,11 +19,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.sonatype.beaker</groupId>
-            <artifactId>beaker-lexicon</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
             <optional>true</optional>

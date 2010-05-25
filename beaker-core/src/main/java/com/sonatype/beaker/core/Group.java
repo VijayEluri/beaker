@@ -1,7 +1,7 @@
 package com.sonatype.beaker.core;
 
-import com.sonatype.beaker.lexicon.GroupPop;
-import com.sonatype.beaker.lexicon.GroupPush;
+import com.sonatype.beaker.core.lexicon.GroupPop;
+import com.sonatype.beaker.core.lexicon.GroupPush;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
