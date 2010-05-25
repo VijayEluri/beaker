@@ -38,5 +38,7 @@ if $cygwin ; then
     BOOTJAR=`cygpath --windows "$BOOTJAR"`
 fi
 
+JAVA_OPTS="$JAVA_OPTS -Dlogback.configurationFile=$BEAKER_HOME/etc/logback.xml"
+
 # Start the JVM
 exec "$JAVACMD" $JAVA_OPTS -jar "$BOOTJAR" "$@"

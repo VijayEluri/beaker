@@ -13,7 +13,7 @@
             <outputDirectory>/</outputDirectory>
             <includes>
                 <include>*.txt</include>
-                <include>examples/**</include>
+                <include>etc/**</include>
             </includes>
         </fileSet>
 
@@ -36,11 +36,6 @@
             </includes>
             <lineEnding>unix</lineEnding>
             <fileMode>0755</fileMode>
-        </fileSet>
-
-        <fileSet>
-            <directory>src/main/underlay/etc</directory>
-            <outputDirectory>etc</outputDirectory>
         </fileSet>
     </fileSets>
 
