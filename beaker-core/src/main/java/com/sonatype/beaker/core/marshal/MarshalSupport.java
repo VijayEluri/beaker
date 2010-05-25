@@ -3,15 +3,17 @@ package com.sonatype.beaker.core.marshal;
 import com.sonatype.beaker.core.Meep;
 import com.sonatype.beaker.core.lexicon.Fault;
 import com.sonatype.beaker.core.lexicon.Generic;
+import com.sonatype.beaker.core.lexicon.TypeDef;
 import com.sonatype.beaker.core.lexicon.GroupPop;
 import com.sonatype.beaker.core.lexicon.GroupPush;
 import com.sonatype.beaker.core.lexicon.Header;
 import com.sonatype.beaker.core.lexicon.Message;
 import com.sonatype.beaker.core.lexicon.StackTrace;
 import com.sonatype.beaker.core.lexicon.Summary;
-import com.sonatype.beaker.core.lexicon.TypeDef;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XppDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -28,6 +30,8 @@ import java.util.Set;
 public abstract class MarshalSupport
 {
     public static final String MEEP_STREAM = "meep-stream";
+
+    protected final Logger log = LoggerFactory.getLogger(getClass());
 
     protected final XStream xstream = new XStream(new XppDriver());
 
@@ -59,6 +63,7 @@ public abstract class MarshalSupport
             return false;
         }
 
+        log.debug("Registering type: {}", type);
         xstream.processAnnotations(type);
         registered.add(type);
         return true;
