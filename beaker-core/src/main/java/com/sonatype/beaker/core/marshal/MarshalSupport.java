@@ -3,7 +3,6 @@ package com.sonatype.beaker.core.marshal;
 import com.sonatype.beaker.core.Meep;
 import com.sonatype.beaker.core.lexicon.Fault;
 import com.sonatype.beaker.core.lexicon.Generic;
-import com.sonatype.beaker.core.lexicon.TypeDef;
 import com.sonatype.beaker.core.lexicon.GroupPop;
 import com.sonatype.beaker.core.lexicon.GroupPush;
 import com.sonatype.beaker.core.lexicon.Header;
