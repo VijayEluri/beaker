@@ -79,7 +79,7 @@
                             <addClasspath>true</addClasspath>
                         </manifest>
                         <manifestEntries>
-                            <Premain-Class>org.aspectj.weaver.loadtime.Agent</Premain-Class>
+                            <Premain-Class>com.sonatype.beaker.core.agent.Agent</Premain-Class>
                             <Can-Redefine-Classes>true</Can-Redefine-Classes>
                         </manifestEntries>
                     </archive>
