@@ -7,7 +7,7 @@
         <format>zip</format>
     </formats>
 
-    <baseDirectory>beaker</baseDirectory>
+    <includeBaseDirectory>false</includeBaseDirectory>
 
     <fileSets>
         <fileSet>
