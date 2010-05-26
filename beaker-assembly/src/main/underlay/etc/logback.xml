@@ -23,7 +23,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.sonatype.beaker" level="${beaker.log.level:-DEBUG}"/>
+    <logger name="org.sonatype.beaker" level="${beaker.log.level:-DEBUG}"/>
 
     <root level="WARN">
         <appender-ref ref="CONSOLE"/>

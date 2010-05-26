@@ -5,7 +5,7 @@
 
 <aspectj>
     <aspects>
-        <aspect name="com.sonatype.beaker.maven2.Rules"/>
+        <aspect name="org.sonatype.beaker.maven2.Rules"/>
     </aspects>
 
     <weaver options="-Xlint:ignore">

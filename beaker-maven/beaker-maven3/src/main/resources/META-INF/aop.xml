@@ -5,8 +5,8 @@
 
 <aspectj>
     <aspects>
-        <!--<aspect name="com.sonatype.beaker.maven3.Trace"/>-->
-        <aspect name="com.sonatype.beaker.maven3.Rules"/>
+        <!--<aspect name="org.sonatype.beaker.maven3.Trace"/>-->
+        <aspect name="org.sonatype.beaker.maven3.Rules"/>
     </aspects>
 
     <weaver options="-Xlint:ignore">

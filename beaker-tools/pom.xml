@@ -38,7 +38,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.sonatype.beaker.tools.Main</mainClass>
+                            <mainClass>org.sonatype.beaker.tools.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
