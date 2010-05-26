@@ -9,9 +9,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.sonatype</groupId>
-        <artifactId>sonatype</artifactId>
-        <version>11</version>
+        <groupId>org.sonatype.forge</groupId>
+        <artifactId>forge-parent</artifactId>
+        <version>5</version>
     </parent>
 
     <groupId>com.sonatype.beaker</groupId>
@@ -114,12 +114,6 @@
 
             <dependency>
                 <groupId>com.sonatype.beaker</groupId>
-                <artifactId>beaker-commands</artifactId>
-                <version>0.1-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.sonatype.beaker</groupId>
                 <artifactId>beaker-assembly</artifactId>
                 <version>0.1-SNAPSHOT</version>
             </dependency>
@@ -130,7 +124,6 @@
         <module>beaker-core</module>
         <module>beaker-maven</module>
         <module>beaker-tools</module>
-        <!--<module>beaker-commands</module>-->
         <module>beaker-assembly</module>
     </modules>
     

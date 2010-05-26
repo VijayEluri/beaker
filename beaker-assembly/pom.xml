@@ -24,11 +24,6 @@
             <artifactId>beaker-tools</artifactId>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>com.sonatype.beaker</groupId>-->
-            <!--<artifactId>beaker-commands</artifactId>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>com.sonatype.beaker</groupId>
             <artifactId>beaker-maven3</artifactId>
