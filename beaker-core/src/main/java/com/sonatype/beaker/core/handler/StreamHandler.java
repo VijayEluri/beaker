@@ -39,9 +39,14 @@ public class StreamHandler
         marshaller = new Marshaller(out);
     }
 
-    public synchronized void handle(final Meep meep) throws Exception {
+    public void handle(final Meep meep) throws Exception {
         assert marshaller != null;
         marshaller.marshal(meep);
+
+        if (out == System.out || out == System.err) {
+            out.write("\n".getBytes());
+            out.flush();
+        }
     }
 
     public void close() throws Exception {

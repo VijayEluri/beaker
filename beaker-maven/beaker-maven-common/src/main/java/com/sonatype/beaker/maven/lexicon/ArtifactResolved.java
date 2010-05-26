@@ -33,6 +33,9 @@ public class ArtifactResolved
     private String classifier;
 
     @XStreamAsAttribute
+    private boolean optional;
+
+    @XStreamAsAttribute
     private File file;
 
     public String getGroupId() {
@@ -81,6 +84,14 @@ public class ArtifactResolved
 
     public void setClassifier(String classifier) {
         this.classifier = classifier;
+    }
+
+    public boolean isOptional() {
+        return optional;
+    }
+
+    public void setOptional(boolean optional) {
+        this.optional = optional;
     }
 
     public File getFile() {

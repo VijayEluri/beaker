@@ -60,6 +60,18 @@ public privileged aspect Rules
     //
     // TODO: See if we can find demarcation of when a plugin is loaded and gets its dependencies resolved, so we can push/pop around it
     //
+
+    Object around():
+        execution(org.apache.maven.artifact.Artifact
+            org.apache.maven.plugin.internal.DefaultPluginDependenciesResolver.resolve(
+                org.apache.maven.model.Plugin,
+                org.apache.maven.artifact.resolver.ArtifactResolutionRequest))
+    {
+        handle(delegate.pluginLoading, thisJoinPoint);
+        Object result = proceed();
+        handle(delegate.pluginLoaded, thisJoinPoint);
+        return result;
+    }
     
     //    /**
     //     * Capture when Maven execution begins.

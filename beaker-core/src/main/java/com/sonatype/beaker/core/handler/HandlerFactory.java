@@ -26,6 +26,10 @@ public class HandlerFactory
             return new FileHandler();
         }
 
+        if (classname.equals("stream")) {
+            return new StreamHandler();
+        }
+
         try {
             Class type = HandlerFactory.class.getClassLoader().loadClass(classname);
             return (Handler) type.newInstance();

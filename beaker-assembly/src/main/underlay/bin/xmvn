@@ -33,6 +33,10 @@ if [ -z "$BEAKER_HOME" ]; then
     BEAKER_HOME=`cd "$DIRNAME/.."; pwd`
 fi
 
+if [ -z "$BEAKER_HANDLER" ]; then
+    BEAKER_HANDLER="file"
+fi
+
 if [ -z "$BEAKER_HANDLER_FILE" ]; then
     BEAKER_HANDLER_FILE="`pwd`/beaker.xmeep.gz"
 fi
@@ -49,7 +53,7 @@ fi
 VERSION="0.1-SNAPSHOT"
 
 MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.home=$BEAKER_HOME"
-MAVEN_OPTS="$MAVEN_OPTS -javaagent:$BEAKER_HOME/lib/beaker-maven-3-${VERSION}.jar"
+MAVEN_OPTS="$MAVEN_OPTS -javaagent:$BEAKER_HOME/lib/beaker-maven3-${VERSION}.jar"
 
 #MAVEN_OPTS="$MAVEN_OPTS -Daj.weaving.verbose=true -Dorg.aspectj.weaver.showWeaveInfo=true"
 
@@ -58,8 +62,7 @@ MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.log.level=DEBUG"
 MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.log.console.threshold=INFO"
 MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.log.file=$BEAKER_LOG_FILE"
 MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.log.file.threshold=TRACE"
-
-MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.handler=file"
+MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.handler=$BEAKER_HANDLER"
 MAVEN_OPTS="$MAVEN_OPTS -Dbeaker.handler.file=$BEAKER_HANDLER_FILE"
 
 export MAVEN_OPTS

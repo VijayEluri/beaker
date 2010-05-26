@@ -133,4 +133,14 @@ class RuleDelegate
                 break
         }
     }
+
+    public Closure pluginLoading = { point ->
+        def plugin = point.args[0]
+        meep(copy(plugin, new PluginLoading()))
+    }
+
+    public Closure pluginLoaded = { point ->
+        def plugin = point.args[0]
+        meep(copy(plugin, new PluginLoaded()))
+    }
 }
