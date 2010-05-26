@@ -1,9 +1,9 @@
 package org.sonatype.beaker.core.handler;
 
-import org.sonatype.beaker.core.Meep;
-import org.sonatype.beaker.core.marshal.Marshaller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonatype.beaker.core.Meep;
+import org.sonatype.beaker.core.marshal.Marshaller;
 
 import java.io.IOException;
 import java.io.OutputStream;

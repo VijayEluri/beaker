@@ -1,9 +1,9 @@
 package org.sonatype.beaker.core;
 
-import org.sonatype.beaker.core.lexicon.GroupPop;
-import org.sonatype.beaker.core.lexicon.GroupPush;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonatype.beaker.core.lexicon.GroupPop;
+import org.sonatype.beaker.core.lexicon.GroupPush;
 
 import java.util.Stack;
 import java.util.concurrent.atomic.AtomicLong;

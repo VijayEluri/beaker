@@ -1,8 +1,8 @@
 package org.sonatype.beaker.core.handler;
 
-import org.sonatype.beaker.core.Beaker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonatype.beaker.core.Beaker;
 
 /**
  * ???

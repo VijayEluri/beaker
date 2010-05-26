@@ -1,5 +1,9 @@
 package org.sonatype.beaker.core.marshal;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.XppDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonatype.beaker.core.Meep;
 import org.sonatype.beaker.core.lexicon.Fault;
 import org.sonatype.beaker.core.lexicon.Generic;
@@ -9,10 +13,6 @@ import org.sonatype.beaker.core.lexicon.Header;
 import org.sonatype.beaker.core.lexicon.Message;
 import org.sonatype.beaker.core.lexicon.StackTrace;
 import org.sonatype.beaker.core.lexicon.Summary;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.XppDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

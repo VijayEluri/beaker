@@ -1,11 +1,11 @@
 package org.sonatype.beaker.core;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sonatype.beaker.core.handler.Handler;
 import org.sonatype.beaker.core.handler.HandlerFactory;
 import org.sonatype.beaker.core.lexicon.Header;
 import org.sonatype.beaker.core.lexicon.Summary;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * ???
