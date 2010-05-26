@@ -14,7 +14,7 @@
         <version>6</version>
     </parent>
 
-    <groupId>com.sonatype.beaker</groupId>
+    <groupId>org.sonatype.beaker</groupId>
     <artifactId>beaker</artifactId>
     <name>Beaker</name>
     <version>0.1-SNAPSHOT</version>
@@ -83,37 +83,37 @@
             <!-- INTERNAL -->
 
             <dependency>
-                <groupId>com.sonatype.beaker</groupId>
+                <groupId>org.sonatype.beaker</groupId>
                 <artifactId>beaker-core</artifactId>
                 <version>0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.sonatype.beaker</groupId>
+                <groupId>org.sonatype.beaker</groupId>
                 <artifactId>beaker-maven-common</artifactId>
                 <version>0.1-SNAPSHOT</version>
             </dependency>
             
             <dependency>
-                <groupId>com.sonatype.beaker</groupId>
+                <groupId>org.sonatype.beaker</groupId>
                 <artifactId>beaker-maven3</artifactId>
                 <version>0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.sonatype.beaker</groupId>
+                <groupId>org.sonatype.beaker</groupId>
                 <artifactId>beaker-maven2</artifactId>
                 <version>0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.sonatype.beaker</groupId>
+                <groupId>org.sonatype.beaker</groupId>
                 <artifactId>beaker-tools</artifactId>
                 <version>0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
-                <groupId>com.sonatype.beaker</groupId>
+                <groupId>org.sonatype.beaker</groupId>
                 <artifactId>beaker-assembly</artifactId>
                 <version>0.1-SNAPSHOT</version>
             </dependency>
