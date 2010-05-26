@@ -280,7 +280,7 @@
                         <configuration>
                             <rules>
                                 <requireJavaVersion>
-                                    <version>[1.6,)</version>
+                                    <version>[1.5,)</version>
                                 </requireJavaVersion>
                             </rules>
                         </configuration>
