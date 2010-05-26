@@ -50,6 +50,7 @@
                         <configuration>
                             <descriptors>
                                 <descriptor>src/main/assembly/bin.xml</descriptor>
+                                <descriptor>src/main/assembly/min.xml</descriptor>
                             </descriptors>
                             <finalName>beaker-${project.version}</finalName>
                         </configuration>
