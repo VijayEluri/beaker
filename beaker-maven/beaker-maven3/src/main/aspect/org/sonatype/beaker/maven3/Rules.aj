@@ -34,6 +34,8 @@ public privileged aspect Rules
 
     /**
      * Capture when an ExecutionEvent is about to be fired.
+     *
+     * @supports 3.0-beta-1
      */
     before():
         execution(void org.apache.maven.lifecycle.internal.DefaultExecutionEventCatapult.fire(
@@ -46,6 +48,8 @@ public privileged aspect Rules
 
     /**
      * Capture when an artifact has been resolved.
+     *
+     * @supports 3.0-beta-1, 3.0-alpha-7
      */
     after() returning:
         execution(void org.apache.maven.artifact.resolver.DefaultArtifactResolver.resolve(
@@ -56,55 +60,4 @@ public privileged aspect Rules
     {
         handle(delegate.artifactResolved, thisJoinPoint);
     }
-
-    //
-    // TODO: See if we can find demarcation of when a plugin is loaded and gets its dependencies resolved, so we can push/pop around it
-    //
-
-    Object around():
-        execution(org.apache.maven.artifact.Artifact
-            org.apache.maven.plugin.internal.DefaultPluginDependenciesResolver.resolve(
-                org.apache.maven.model.Plugin,
-                org.apache.maven.artifact.resolver.ArtifactResolutionRequest))
-    {
-        handle(delegate.pluginLoading, thisJoinPoint);
-        Object result = proceed();
-        handle(delegate.pluginLoaded, thisJoinPoint);
-        return result;
-    }
-    
-    //    /**
-    //     * Capture when Maven execution begins.
-    //     */
-    //    before():
-    //        execution(org.apache.execution.MavenExecutionResult org.apache.maven.DefaultMaven.doExecute(
-    //            org.apache.execution.MavenExecutionRequest))
-    //    {
-    //        // TODO:
-    //    }
-
-    //    /**
-    //     * Capture when a Maven session begins.
-    //     */
-    //    before():
-    //        execution(void org.apache.maven.lifecycle.internal.LifecycleStarter.execute(
-    //            org.apache.maven.execution.MavenSession))
-    //    {
-    //        // TODO:
-    //    }
-
-    //    /**
-    //     * Capture when a mojo is executed.
-    //     */
-    //    before():
-    //        execution(void org.apache.maven.lifecycle.internal.MojoExecutor.execute(
-    //            org.apache.maven.execution.MavenSession,
-    //            org.apache.maven.plugin.MojoExecution,
-    //            org.apache.maven.lifecycle.internal.ProjectIndex,
-    //            org.apache.maven.lifecycle.internal.DependencyContext,
-    //            org.apache.maven.lifecycle.internal.PhaseRecorder))
-    //    {
-    //        // TODO:
-    //    }
-
 }
