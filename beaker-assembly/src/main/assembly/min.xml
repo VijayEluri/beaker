@@ -25,7 +25,6 @@
             <useStrictFiltering>true</useStrictFiltering>
             <excludes>
                 <exclude>org.sonatype.beaker:beaker-tools</exclude>
-                <exclude>org.sonatype.beaker:beaker-maven2</exclude>
                 <exclude>org.sonatype.beaker:beaker-maven3</exclude>
             </excludes>
         </dependencySet>
@@ -36,7 +35,6 @@
             <outputFileNameMapping>${artifact.artifactId}${dashClassifier?}.${artifact.extension}</outputFileNameMapping>
             <includes>
                 <include>org.sonatype.beaker:beaker-tools</include>
-                <include>org.sonatype.beaker:beaker-maven2</include>
                 <include>org.sonatype.beaker:beaker-maven3</include>
             </includes>
         </dependencySet>
