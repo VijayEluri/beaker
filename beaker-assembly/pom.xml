@@ -28,11 +28,6 @@
             <groupId>org.sonatype.beaker</groupId>
             <artifactId>beaker-maven3</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.sonatype.beaker</groupId>
-            <artifactId>beaker-maven2</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

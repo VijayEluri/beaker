@@ -102,12 +102,6 @@
 
             <dependency>
                 <groupId>org.sonatype.beaker</groupId>
-                <artifactId>beaker-maven2</artifactId>
-                <version>0.1-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.sonatype.beaker</groupId>
                 <artifactId>beaker-tools</artifactId>
                 <version>0.1-SNAPSHOT</version>
             </dependency>
